@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane prefHeight="518.0" prefWidth="870.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.ControllerPersonaje">
+   <children>
+      <Text layoutX="306.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear nuevo personaje">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vida">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Campos (espacio requerido)">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad de golpes que recibe">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel de aparición">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Text layoutX="57.0" layoutY="374.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Costo">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nombreTF" layoutX="306.0" layoutY="102.0" />
+      <TextField fx:id="dantGolpesTF" layoutX="306.0" layoutY="152.0" />
+      <TextField fx:id="vidaTF" layoutX="306.0" layoutY="202.0" />
+      <TextField fx:id="camposTF" layoutX="306.0" layoutY="252.0" />
+      <TextField fx:id="nivelAparTF" layoutX="306.0" layoutY="302.0" />
+      <TextField fx:id="costoTF" layoutX="306.0" layoutY="352.0" />
+      <ImageView fx:id="imagenNivelIV" fitHeight="286.0" fitWidth="287.0" layoutX="541.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
+      <Text layoutX="662.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel x" />
+      <Button layoutX="56.0" layoutY="411.0" mnemonicParsing="false" onAction="#agregarNiveles" text="Agregar niveles" />
+      <ImageView fitHeight="46.0" fitWidth="45.0" layoutX="811.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagenes/salir.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

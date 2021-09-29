@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="238.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.ControllerPrincipal">
+   <children>
+      <Text layoutX="88.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Creador de personajes y armas">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <RadioButton fx:id="personajeRB" layoutX="111.0" layoutY="127.0" mnemonicParsing="false" onAction="#personajeSelected" text="Personaje" />
+      <RadioButton fx:id="armaRB" layoutX="258.0" layoutY="127.0" mnemonicParsing="false" onAction="#armaSelected" text="Arma" />
+      <Button fx:id="crearB" layoutX="203.0" layoutY="163.0" mnemonicParsing="false" onAction="#crear" text="Crear" />
+      <ImageView fx:id="salir" fitHeight="46.0" fitWidth="45.0" layoutX="403.0" layoutY="21.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Imagenes/salir.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>
