@@ -164,7 +164,7 @@ public class Personaje implements IPrototype<Personaje> {
         private int campos;
         private int nivelAparicion;
         private float costo;
-        private WeaponManager armas;
+        private WeaponManager armas = new WeaponManager();
 
         public BuilderPersonaje(){
 

@@ -52,12 +52,13 @@
       <TextField fx:id="nivelAparTF" layoutX="306.0" layoutY="302.0" />
       <TextField fx:id="costoTF" layoutX="306.0" layoutY="352.0" />
       <ImageView fx:id="imagenNivelIV" fitHeight="286.0" fitWidth="287.0" layoutX="541.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true" />
-      <Text layoutX="662.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel x" />
+      <Text fx:id="nivelNum" layoutX="662.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel " />
       <Button layoutX="56.0" layoutY="411.0" mnemonicParsing="false" onAction="#agregarNiveles" text="Agregar niveles" />
       <ImageView fitHeight="46.0" fitWidth="45.0" layoutX="811.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/salir.png" />
          </image>
       </ImageView>
+      <Button layoutX="398.0" layoutY="457.0" mnemonicParsing="false" text="Agregar" />
    </children>
 </Pane>
