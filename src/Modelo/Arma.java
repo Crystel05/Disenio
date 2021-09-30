@@ -26,6 +26,7 @@ public class Arma implements IPrototype<Arma> {
         this.apariencia = apariencia;
     }
 
+    //TODO:Pendiente ajustar el builder del arma para que pueda retornarse para modificaciones.
     public static class BuilderArma implements IBuilder<Arma> {
         String nombre;
         int alcance;

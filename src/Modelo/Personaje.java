@@ -4,6 +4,7 @@ import Modelo.Apariencia.LvlImages;
 import Modelo.Apariencia.ManagerApariencia;
 import Modelo.BuilderPattern.IBuilder;
 import Modelo.PrototypePattern.IPrototype;
+import Modelo.PrototypePattern.WeaponManager;
 import sun.awt.PeerEvent;
 
 import java.awt.*;
@@ -20,24 +21,22 @@ public class Personaje implements IPrototype<Personaje> {
     private int ataque;
     private int nivel;
     private int campos;
-    private int nivelApariencia;
+    private int nivelAparicion;
     private float costo;
-    private Arma armaActual;
-    //Se cambia a un hash para tener que evitar validaciones. Esto hace que no pueda tener dos armas iguales.
-    private HashMap<String,Arma> armas;
+    private WeaponManager armas;
     boolean alive;
     int posX;
     int posY;
 
 
-    public Personaje(String nombre, ManagerApariencia apariencia, int vida, int ataque, int nivel, int campos, int nivelApariencia, float costo,HashMap<String,Arma> armas) {
+    public Personaje(String nombre, ManagerApariencia apariencia, int vida, int ataque, int nivel, int campos, int nivelAparicion, float costo,WeaponManager armas) {
         this.nombre = nombre;
         this.apariencia = apariencia;
         this.vida = vida;
         this.ataque = ataque;
         this.nivel = nivel;
         this.campos = campos;
-        this.nivelApariencia = nivelApariencia;
+        this.nivelAparicion = nivelAparicion;
         this.costo = costo;
         this.armas = armas;
         this.alive = true;
@@ -93,12 +92,12 @@ public class Personaje implements IPrototype<Personaje> {
         this.campos = campos;
     }
 
-    public int getNivelApariencia() {
-        return nivelApariencia;
+    public int getnivelAparicion() {
+        return nivelAparicion;
     }
 
-    public void setNivelApariencia(int nivelApariencia) {
-        this.nivelApariencia = nivelApariencia;
+    public void setnivelAparicion(int nivelAparicion) {
+        this.nivelAparicion = nivelAparicion;
     }
 
     public float getCosto() {
@@ -107,6 +106,14 @@ public class Personaje implements IPrototype<Personaje> {
 
     public void setCosto(float costo) {
         this.costo = costo;
+    }
+
+    public WeaponManager getArmas() {
+        return armas;
+    }
+
+    public void setArmas(WeaponManager armas) {
+        this.armas = armas;
     }
 
     public boolean isAlive(){
@@ -137,33 +144,14 @@ public class Personaje implements IPrototype<Personaje> {
         this.posY = y;
     }
 
-    //Hash de armas
-
-    public HashMap<String,Arma> getArmas(){return this.armas;}
-
-    public void setArmas(HashMap<String,Arma> armas){this.armas = armas;}
-
-    public void addArma(Arma arma){this.armas.put(arma.getNombre(),arma);}
-
-    //TODO:Tomar en cuenta los nulos
-    public Arma getArma(String nombre){
-        return armas.get(nombre);
-    }
-
-    public Arma getArmaActual(Arma arma){return this.armaActual;}
-
-    public void setArmaActual(Arma arma){this.armaActual = arma;}
-
-
     ///Metodos Dummy
 
-    //TODO:Tiene que ser abstracto.
     protected void atacar(ArrayList<Personaje> objetivos,ArrayList<Arma> armas){
         //TODO:CONSIDERAR que el ataque puede ser con varias armas o con ninguna.
     }
 
     protected void moverse(int x,int y){
-
+        setPosition(x,y);
     }
 
     protected void morir(){
@@ -180,10 +168,26 @@ public class Personaje implements IPrototype<Personaje> {
         private int ataque;
         private int nivel;
         private int campos;
-        private int nivelApariencia;
+        private int nivelAparicion;
         private float costo;
-        private Arma armaActual;
-        private HashMap<String,Arma> armas;
+        private WeaponManager armas;
+
+        public BuilderPersonaje(){
+
+        }
+
+        //Duda al profe de que si estoy compartiendo referencias en los tipos nativos.
+        public BuilderPersonaje(Personaje personaje) {
+            personaje.nombre = nombre;
+            personaje.apariencia = apariencia.deepClone();
+            personaje.vida = vida;
+            personaje.ataque = ataque;
+            personaje.nivel = nivel;
+            personaje.campos = campos;
+            personaje.nivelAparicion = nivelAparicion;
+            personaje.costo = costo;
+            personaje.armas = armas.deepClone();
+        }
 
         public BuilderPersonaje setNombre(String nombre) {
             this.nombre = nombre;
@@ -197,6 +201,11 @@ public class Personaje implements IPrototype<Personaje> {
 
         public BuilderPersonaje setVida(int vida) {
             this.vida = vida;
+            return this;
+        }
+
+        public BuilderPersonaje setnivelAparicion(int nivelAparicion){
+            this.nivelAparicion = nivelAparicion;
             return this;
         }
 
@@ -233,33 +242,29 @@ public class Personaje implements IPrototype<Personaje> {
         }
 
         public BuilderPersonaje addArma(Arma arma){
-            this.armas.put(arma.getNombre(),arma);
+            this.armas.addArma(arma);
             return this;
         }
 
-        public BuilderPersonaje setArmas(HashMap<String,Arma> armas){
+        public BuilderPersonaje setArmas(WeaponManager armas){
             this.armas = armas;
             return this;
         }
 
         @Override
         public Personaje build() {
-            return new Personaje(nombre, apariencia, vida, ataque, nivel, campos, nivelApariencia, costo,armas);
+            return new Personaje(nombre, apariencia, vida, ataque, nivel, campos, nivelAparicion, costo,armas);
         }
     }
 
     @Override
     public Personaje clone() {
-        return new Personaje(nombre, new ManagerApariencia(), vida, ataque, nivel, campos, nivelApariencia, costo,new HashMap<String,Arma>());
+        return new Personaje(nombre, new ManagerApariencia(), vida, ataque, nivel, campos, nivelAparicion, costo,armas.clone());
     }
 
     @Override
     public Personaje deepClone() {
-        HashMap<String,Arma> nuevasArmas = new HashMap<>();
-        for(Map.Entry<String,Arma> entry : this.armas.entrySet()){
-            nuevasArmas.put(entry.getKey(),entry.getValue().deepClone());
-        }
-        return new Personaje(nombre, this.apariencia.deepClone(), vida, ataque, nivel, campos, nivelApariencia, costo,nuevasArmas);
+        return new Personaje(nombre, this.apariencia.deepClone(), vida, ataque, nivel, campos, nivelAparicion, costo,armas.deepClone());
     }
 
     @Override
@@ -271,13 +276,13 @@ public class Personaje implements IPrototype<Personaje> {
                 ", ataque=" + ataque +
                 ", nivel=" + nivel +
                 ", campos=" + campos +
-                ", nivelApariencia=" + nivelApariencia +
+                ", nivelAparicion=" + nivelAparicion +
                 ", costo=" + costo +
                 '}';
     }
 
     public BuilderPersonaje getBuildable(){
-        return new BuilderPersonaje();
+        return new BuilderPersonaje(this);
     }
 
     //TODO: Metodos Dummy Tienen que poder hacersele override.
