@@ -45,4 +45,8 @@ public class ControllerPersonaje {
         comun.cerrar(event, true);
         comun.abrirVentana("FXMLS/principal.fxml");
     }
+
+    public void crearPersonaje(){
+        //comun.getControlador().
+    }
 }

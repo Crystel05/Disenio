@@ -2,11 +2,12 @@ package Modelo;
 
 import Modelo.Apariencia.LvlImages;
 import Modelo.Apariencia.ManagerApariencia;
+import Modelo.BuilderPattern.IBuilder;
 import Modelo.PrototypePattern.IPrototype;
 
 import java.util.ArrayList;
 
-public class PrototypeArma implements IPrototype<PrototypeArma> {
+public class Arma implements IPrototype<Arma> {
 
     //Clase defaultnames puede ser configuracion para asignar los elementos por default
     String nombre;
@@ -16,7 +17,7 @@ public class PrototypeArma implements IPrototype<PrototypeArma> {
     int rangoExplosion;
     ManagerApariencia apariencia;
 
-    public PrototypeArma(String nombre,int alcance,int dano,int nivel,int rangoExplosion,ManagerApariencia apariencia){
+    public Arma(String nombre, int alcance, int dano, int nivel, int rangoExplosion, ManagerApariencia apariencia){
         this.alcance = alcance;
         this.nombre = nombre;
         this.dano = dano;
@@ -25,7 +26,7 @@ public class PrototypeArma implements IPrototype<PrototypeArma> {
         this.apariencia = apariencia;
     }
 
-    static class BuilderArma{
+    public static class BuilderArma implements IBuilder<Arma> {
         String nombre;
         int alcance;
         int dano;
@@ -33,30 +34,43 @@ public class PrototypeArma implements IPrototype<PrototypeArma> {
         int rangoExplosion;
         ManagerApariencia apariencia;
 
-        public void setNombre(String nombre){
+        public BuilderArma setNombre(String nombre){
             this.nombre = nombre;
+            return  this;
         }
-        public void setAlcance(int alcance) {
+        public BuilderArma setAlcance(int alcance) {
             this.alcance = alcance;
+            return  this;
         }
-        public void setDano(int dano) {
+        public BuilderArma setDano(int dano) {
             this.dano = dano;
+            return  this;
         }
-        public void setNivel(int nivel) {
+        public BuilderArma setNivel(int nivel) {
             this.nivel = nivel;
+            return  this;
         }
-        public void setRangoExplosion(int rangoExplosion) {
+        public BuilderArma setRangoExplosion(int rangoExplosion) {
             this.rangoExplosion = rangoExplosion;
+            return  this;
         }
-        public void setApariencia(ManagerApariencia apariencia) {
+        public BuilderArma setApariencia(ManagerApariencia apariencia) {
             this.apariencia = apariencia;
+            return  this;
         }
-        public void addApariencia(int nivel,LvlImages images) {
+        public BuilderArma addApariencia(int nivel,LvlImages images) {
             this.apariencia.addApariencia(nivel,images);
+            return  this;
         }
         //Aca se ponen las imagenes como strings porque van a ser los URL
-        public void addApariencia(int nivel,String nombre, ArrayList<String> imagenes) {
+        public BuilderArma addApariencia(int nivel,String nombre, ArrayList<String> imagenes) {
             this.apariencia.addApariencia(nivel,nombre,imagenes);
+            return  this;
+        }
+
+        @Override
+        public Arma build() {
+            return new Arma(this.nombre,this.alcance,this.dano,this.nivel,this.rangoExplosion,this.apariencia);
         }
     }
 
@@ -85,17 +99,17 @@ public class PrototypeArma implements IPrototype<PrototypeArma> {
 
     //Todo: pensar en como se va a manejar el default de ManagerApariencia.
     @Override
-    public PrototypeArma clone(){
-        return new PrototypeArma(this.nombre,this.alcance,this.dano,this.nivel,this.rangoExplosion,new ManagerApariencia());
+    public Arma clone(){
+        return new Arma(this.nombre,this.alcance,this.dano,this.nivel,this.rangoExplosion,new ManagerApariencia());
     }
 
     //Creo que la apariencia deberia poder ser modificable. Lo mas facil es modificar una lista String. No imagenes individuales.
     @Override
-    public PrototypeArma deepClone(){
+    public Arma deepClone(){
         //Va a copiar las apariencias disponibles
         ManagerApariencia copiaApariencia = this.apariencia.deepClone();
         //Usa el clone normal
-        PrototypeArma copiaArma = clone();
+        Arma copiaArma = clone();
         //Setea de manera privada las nuevas apariencias.
         copiaArma.setApariencia(copiaApariencia);
         return copiaArma;

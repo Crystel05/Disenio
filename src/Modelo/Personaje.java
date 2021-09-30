@@ -1,5 +1,6 @@
 package Modelo;
 
+import Modelo.Apariencia.LvlImages;
 import Modelo.Apariencia.ManagerApariencia;
 import Modelo.BuilderPattern.IBuilder;
 import Modelo.PrototypePattern.IPrototype;
@@ -133,8 +134,14 @@ public class Personaje implements IPrototype<Personaje> {
             return this;
         }
 
-        public void addApariencia(int nivel,String nombre, ArrayList<String> imagenes) {
+        public BuilderPersonaje addApariencia(int nivel,String nombre, ArrayList<String> imagenes) {
             this.apariencia.addApariencia(nivel,nombre,imagenes);
+            return this;
+        }
+
+        public BuilderPersonaje addApariencia(int nivel, LvlImages imagenes) {
+            this.apariencia.addApariencia(nivel,imagenes);
+            return this;
         }
 
         public BuilderPersonaje setCosto(float costo) {
@@ -156,6 +163,24 @@ public class Personaje implements IPrototype<Personaje> {
     @Override
     public Personaje deepClone() {
         //preguntar como hacer con el ManagerApariencia
-        return new Personaje(nombre, new ManagerApariencia(), vida, cantGolpesRecibos, nivel, campos, nivelApariencia, costo);
+        return new Personaje(nombre, this.apariencia.deepClone(), vida, cantGolpesRecibos, nivel, campos, nivelApariencia, costo);
     }
+
+    @Override
+    public String toString() {
+        return "Personaje{" +
+                "nombre='" + nombre + '\'' +
+                ", apariencia=" + apariencia +
+                ", vida=" + vida +
+                ", cantGolpesRecibos=" + cantGolpesRecibos +
+                ", nivel=" + nivel +
+                ", campos=" + campos +
+                ", nivelApariencia=" + nivelApariencia +
+                ", costo=" + costo +
+                '}';
+    }
+
+    //TODO: Get IMAGES
+    //TODO: Metodos Dummy
+    //TODO: AddArmas
 }

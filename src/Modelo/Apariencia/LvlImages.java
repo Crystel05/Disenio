@@ -42,9 +42,9 @@ public class LvlImages implements IPrototype<LvlImages> {
 
     @Override
     public String toString(){
-        String string = "Apariencias:/n";
+        String string = "Apariencias:\n";
         for (Map.Entry<String,ArrayList<String>> apariencia : aparienciasPorNivel.entrySet()) {
-            string += apariencia.getKey()+"/t";
+            string += apariencia.getKey()+"\t";
             for (String url : apariencia.getValue()) {
                 string += url + " ";
             }

@@ -58,7 +58,8 @@ public class ManagerApariencia implements IPrototype<ManagerApariencia> {
     //Agrega un nuevo LvlImages
     public void addApariencia(int nivel,String nombre,ArrayList<String> urls){
         LvlImages images = this.aparienciasDisponibles.get(nivel);
-        if(!images.equals(null))
+        System.out.println(images);
+        if(!(images == null))
         {images.addApariencia(nombre, urls);}
         else
         {this.aparienciasDisponibles.put(nivel,new LvlImages(nombre,urls));}
@@ -67,4 +68,11 @@ public class ManagerApariencia implements IPrototype<ManagerApariencia> {
     //Set Apariencia
     //Todo:Tener cuidado si se crean clones donde los LvlImages esten vacios Get Defaults().
 
+
+    @Override
+    public String toString() {
+        return "ManagerApariencia{" +
+                "aparienciasDisponibles=" + aparienciasDisponibles +
+                '}';
+    }
 }
