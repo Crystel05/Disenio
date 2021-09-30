@@ -14,7 +14,9 @@ public class CreadorDePersonajes {
     ArrayList<String> currentImages;
     IBuilder currentBuilding;
 
-    //Metodos de BuilderPersonaje
+    //TODO:Agregar metodos de creacion sin builder/Modificaciones/Clonaciones
+
+    ////////////////////////////////////////////////////Metodos de BuilderPersonaje////////////////////////////////////////////////////
 
     //TODO:Implementar en GUI
     public void addBuilderPersonaje() {
@@ -64,11 +66,14 @@ public class CreadorDePersonajes {
     }
     //TODO:Implementar en GUI
     public Personaje buildCurrentPersonaje(){
-        IPrototype p = (IPrototype)currentBuilding.build();
-        PrototypeFactory.addItem(currentBuilding);
+        Personaje nuevoPersonaje = (Personaje)currentBuilding.build();
+        PrototypeFactory.addItem(nuevoPersonaje.getNombre(),nuevoPersonaje);
+        return nuevoPersonaje;
     }
 
-    //Metodos de BuilderArma
+    ////////////////////////////////////////////////////Metodos de BuilderArma//////////////////////////////////////////////////
+
+
 //TODO:Implementar en GUI
     public void addBuilderArma() {
         this.currentBuilding = new Arma.BuilderArma();
@@ -103,6 +108,13 @@ public class CreadorDePersonajes {
         LvlImages imagenPorAccion = new LvlImages(accion,imagenes);
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.addApariencia(nivel,imagenPorAccion);
+    }
+
+    //TODO:Implementar en GUI
+    public Arma buildCurrentArma(){
+        Arma arma = (Arma)this.currentBuilding;
+        PrototypeFactory.addItem(arma.getNombre(),arma);
+        return arma;
     }
 
 }
