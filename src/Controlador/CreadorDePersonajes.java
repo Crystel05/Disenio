@@ -16,6 +16,16 @@ public class CreadorDePersonajes {
 
     //TODO:Agregar metodos de creacion sin builder/Modificaciones/Clonaciones
 
+    ///Modificacion a partir de un personaje
+
+    //TODO:Cambiar nombre
+    public void createFromExistente(Personaje personaje){
+        //A partir de este ya se puede usar el builder como si fuerea desde cero.
+        //Hacer tambien esto para las armas.
+        currentBuilding = personaje.getBuildable();
+    }
+
+
     ////////////////////////////////////////////////////Metodos de BuilderPersonaje////////////////////////////////////////////////////
 
     //TODO:Implementar en GUI
