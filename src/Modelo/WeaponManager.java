@@ -1,12 +1,12 @@
-package Modelo.PrototypePattern;
+package Modelo;
 
-import Modelo.Arma;
+import Modelo.PrototypePattern.IPrototype;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WeaponManager implements IPrototype<WeaponManager>{
+public class WeaponManager implements IPrototype<WeaponManager> {
 
     private HashMap<String, Arma> armas;
     private Arma armaActual;

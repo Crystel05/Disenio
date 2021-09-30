@@ -4,14 +4,8 @@ import Modelo.Apariencia.LvlImages;
 import Modelo.Apariencia.ManagerApariencia;
 import Modelo.BuilderPattern.IBuilder;
 import Modelo.PrototypePattern.IPrototype;
-import Modelo.PrototypePattern.WeaponManager;
-import sun.awt.PeerEvent;
 
-import java.awt.*;
-import java.security.KeyPair;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Personaje implements IPrototype<Personaje> {
 
