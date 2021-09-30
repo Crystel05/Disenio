@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class PrototypeFactory {
 
-    public static HashMap<String, IPrototype> prototipos;
+    public static HashMap<String, IPrototype> prototipos = new HashMap<>();
 
     public static IPrototype GetItem(String nombrePrototipo){
         return ((IPrototype)prototipos.get(nombrePrototipo).clone());
@@ -37,6 +37,10 @@ public class PrototypeFactory {
             keys.add(llave);
         }
         return keys;
+    }
+
+    public static HashMap<String, IPrototype> getHash(){
+        return prototipos;
     }
 
 }
