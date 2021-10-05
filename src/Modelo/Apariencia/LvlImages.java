@@ -42,9 +42,9 @@ public class LvlImages implements IPrototype<LvlImages> {
 
     @Override
     public String toString(){
-        String string = "Apariencias:/n";
+        String string = "Apariencias:\n";
         for (Map.Entry<String,ArrayList<String>> apariencia : aparienciasPorNivel.entrySet()) {
-            string += apariencia.getKey()+"/t";
+            string += apariencia.getKey()+"\t";
             for (String url : apariencia.getValue()) {
                 string += url + " ";
             }
@@ -52,6 +52,9 @@ public class LvlImages implements IPrototype<LvlImages> {
         return string;
     }
 
+    //TODO:Preguntar si incluimos en interfaz un boton que deje copiar los campos de las imagenes. Con arrayList libres
+    //Esto clon puede ser util para copiar el set de acciones pero que tengan imagenes nuevas. Esto puede ser util para cuando se quiere repetir
+    //Las acciones pero no se quieren las mismas imagenes. Mas creacional que de copia.
     @Override
     public LvlImages clone() {
         HashMap<String,ArrayList<String>> copiaApariencias = new HashMap<String,ArrayList<String>>();

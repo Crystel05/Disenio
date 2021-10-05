@@ -40,17 +40,6 @@ public class ManagerApariencia implements IPrototype<ManagerApariencia> {
         return new ManagerApariencia(copiaApariencias);
     }
 
-    //Retorna el LvlImages hashmap que tiene varias listas de Strings por String.
-    public LvlImages getApariencias(int nivel){
-        return this.aparienciasDisponibles.get(nivel);
-    }
-
-
-
-    public ArrayList<String> getAparienciaEspecifica(int nivel,String accion){
-        return this.aparienciasDisponibles.get(nivel).getAparienciasPorNivel(accion);
-    }
-
     public void addApariencia(int nivel,LvlImages imagenes){
         this.aparienciasDisponibles.put(nivel, imagenes);
     }
@@ -58,13 +47,33 @@ public class ManagerApariencia implements IPrototype<ManagerApariencia> {
     //Agrega un nuevo LvlImages
     public void addApariencia(int nivel,String nombre,ArrayList<String> urls){
         LvlImages images = this.aparienciasDisponibles.get(nivel);
-        if(!images.equals(null))
+        System.out.println(images);
+        if(!(images == null))
         {images.addApariencia(nombre, urls);}
         else
         {this.aparienciasDisponibles.put(nivel,new LvlImages(nombre,urls));}
     }
 
-    //Set Apariencia
-    //Todo:Tener cuidado si se crean clones donde los LvlImages esten vacios Get Defaults().
+    //Retorna un LvlImages(Diferentes set de imagenes por accion) por nivel.
+    public LvlImages getImagenesPorNivel(int nivel){
+        return this.aparienciasDisponibles.get(nivel);
+    }
 
+    //Retorna una lista de imagenes por nombre
+    public ArrayList<String> getImagenPorNivelNombre(int nivel,String nombre){
+        return getImagenesPorNivel(nivel).getAparienciasPorNivel(nombre);
+    }
+
+    //Retornara todo el hash de imagenes disponibles. Se podira hacer que solo retorne imagenes
+    public HashMap<Integer, LvlImages> getImagenes(){
+        return aparienciasDisponibles;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ManagerApariencia{" +
+                "aparienciasDisponibles=" + aparienciasDisponibles +
+                '}';
+    }
 }

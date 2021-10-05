@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.CreadorDePersonajes;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import java.io.IOException;
 
 public class ControllerComun {
 
+    private CreadorDePersonajes controladorLogico;
     private static ControllerComun controllerComun;
     public ControllerComun(){}
 
@@ -38,5 +40,13 @@ public class ControllerComun {
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public CreadorDePersonajes getControlador(){
+        return this.controladorLogico;
+    }
+
+    public void agregarControlador(CreadorDePersonajes controladorLogico){
+        this.controladorLogico = controladorLogico;
     }
 }
