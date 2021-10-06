@@ -93,7 +93,20 @@ public class CrearArma implements Initializable, DragWindow {
         comun.getControlador().setNameBuilderArma(nombreArma.getText());
     }
     public void setAlcance(){
-        comun.getControlador().setAlcanceBuilderArma(String.valueOf(alcanceArma.getText()));
+        comun.getControlador().setAlcanceBuilderArma(Integer.parseInt(alcanceArma.getText()));
     }
-    public void comun.getControlador().setdanosetDano(){}
+    public void setDano(){
+        comun.getControlador().setDanoBuilderArma(Integer.parseInt(dannoArma.getText()));
+    }
+    public void setRango(){
+        comun.getControlador().setRangoBuilderArma(Integer.parseInt(rangoExplosionArma.getText()));
+    }
+    public void addAparienciaArma(String nivel,String nombre){
+        comun.getControlador().addAparienciaArma(Integer.parseInt(nivel),nombre);
+    }
+    public void crearArma(){
+        comun.getControlador().buildCurrentArma();
+    }
+
+
 }

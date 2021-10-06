@@ -123,7 +123,7 @@ public class CreadorDePersonajes {
     public void addBuilderArma() {
         this.currentBuilding = new Arma.BuilderArma();
     }
-    //TODO:Implementar en GUI
+
     public void setNameBuilderArma(String nombre){
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.setNombre(nombre);
@@ -133,34 +133,17 @@ public class CreadorDePersonajes {
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.setAlcance(alcance);
     }
-    //TODO:Implementar en GUI
+
     public void setDanoBuilderArma(int dano){
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.setDano(dano);
     }
-    //TODO:Implementar en GUI
+
     public void setRangoBuilderArma(int rangoExplosion){
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.setRangoExplosion(rangoExplosion);
     }
-    //TODO:Implementar en GUI
-    public void setNivelBuilderArma(int nivel){
-        Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
-        this.currentBuilding = nowBuilding.setNivel(nivel);
-    }
-    //TODO:Implementar en GUI
-    public void setNivelBuilderArma(int nivel,String accion,ArrayList<String> imagenes){
-        LvlImages imagenPorAccion = new LvlImages(accion,imagenes);
-        Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
-        this.currentBuilding = nowBuilding.addApariencia(nivel,imagenPorAccion);
-    }
-    //TODO:Implementar en GUI
-    public void setMunicionArma(int municion){
-        Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
-        this.currentBuilding = nowBuilding.setMunicion(municion);
-    }
 
-    //TODO:Implementar en GUI
     public void addAparienciaArma(int nivel,String accion)
     {
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
