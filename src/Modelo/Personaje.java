@@ -115,7 +115,7 @@ public class Personaje implements IPrototype<Personaje> {
     }
 
     public void setAlive(boolean alive){
-        this.alive = !alive;
+        this.alive = alive;
     }
 
     public int[] getPosition(){
@@ -141,7 +141,18 @@ public class Personaje implements IPrototype<Personaje> {
     ///Metodos Dummy
 
     protected void atacar(ArrayList<Personaje> objetivos,ArrayList<Arma> armas){
-        //TODO:CONSIDERAR que el ataque puede ser con varias armas o con ninguna.
+        if(armas != null){
+            for (Arma arma:armas){
+                for (Personaje objetivo:objetivos ){
+                    objetivo.danar(arma.getDano());
+                }
+            }
+        }
+        else{
+            for(Personaje objetivo:objetivos){
+                objetivo.danar(ataque);
+            }
+        }
     }
 
     protected void moverse(int x,int y){
@@ -151,6 +162,13 @@ public class Personaje implements IPrototype<Personaje> {
     protected void morir(){
         setAlive(false);
         this.vida = 0;
+    }
+
+    protected void danar(int dano){
+        this.vida -= dano;
+        if (vida<=0){
+            morir();
+        }
     }
 
 

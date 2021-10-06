@@ -16,9 +16,14 @@ public class WeaponManager implements IPrototype<WeaponManager> {
         this.armas = new HashMap<>();
     }
 
-    WeaponManager(HashMap<String, Arma> armas){
+    WeaponManager(WeaponManager armas){
+        this.armas = armas.deepClone().getArmas();
+    }
+
+    WeaponManager(HashMap<String,Arma> armas){
         this.armas = armas;
     }
+
 
     public HashMap<String,Arma> getArmas(){return this.armas;}
 
@@ -26,14 +31,16 @@ public class WeaponManager implements IPrototype<WeaponManager> {
 
     public void addArma(Arma arma){this.armas.put(arma.getNombre(),arma);}
 
-    //TODO:Se puede hacer esto los diferentes Hashes que usamos en el proyecto.
     public void addArmas(HashMap<String,Arma> nuevasArmas){
         for(Map.Entry<String,Arma> entry:nuevasArmas.entrySet()){
             armas.put(entry.getKey(),entry.getValue().deepClone());
         }
     }
 
-    //TODO:Tomar en cuenta los nulos
+    public void addArmas(WeaponManager manager){
+        addArmas(manager.getArmas());
+    }
+
     public Arma getArma(String nombre){
         return armas.get(nombre);
     }
@@ -42,15 +49,19 @@ public class WeaponManager implements IPrototype<WeaponManager> {
 
     public void setArmaActual(Arma arma){this.armaActual = arma;}
 
-    //TODO:Probar
+    //TODO:Probar en interfaz para ver las diferentes armas del personaje
     public void nextArma(){
-        ArrayList<Arma> listaArmas = new ArrayList<>(armas.values());
-        armaActual = listaArmas.get(nextIndex(listaArmas.indexOf(armaActual)));
+        if(!armas.isEmpty()) {
+            ArrayList<Arma> listaArmas = new ArrayList<>(armas.values());
+            armaActual = listaArmas.get(nextIndex(listaArmas.indexOf(armaActual)));
+        }
     }
 
     public void previousArma(){
-        ArrayList<Arma> listaArmas = new ArrayList<>(armas.values());
-        armaActual = listaArmas.get(prevIndex(listaArmas.indexOf(armaActual)));
+        if(!armas.isEmpty()) {
+            ArrayList<Arma> listaArmas = new ArrayList<>(armas.values());
+            armaActual = listaArmas.get(prevIndex(listaArmas.indexOf(armaActual)));
+        }
     }
 
     private int nextIndex(int indexOf)
