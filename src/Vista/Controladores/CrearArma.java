@@ -90,6 +90,8 @@ public class CrearArma implements Initializable, DragWindow {
             if (!rangoExplosionArma.getText().isEmpty())
                 //set rango explosion
                 System.out.println();
+
+            comun.getControlador().buildCurrentArma();
         }else {
             System.out.println("Tiene que tener nombre");
         }
@@ -135,9 +137,4 @@ public class CrearArma implements Initializable, DragWindow {
     public void addAparienciaArma(String nivel,String nombre){
         comun.getControlador().addAparienciaArma(Integer.parseInt(nivel),nombre);
     }
-    public void crearArma(){
-        comun.getControlador().buildCurrentArma();
-    }
-
-
 }
