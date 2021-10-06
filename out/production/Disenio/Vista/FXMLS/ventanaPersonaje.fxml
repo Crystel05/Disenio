@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
@@ -10,10 +11,24 @@
 
 <Pane fx:id="contenedor" prefHeight="584.0" prefWidth="553.0" style="-fx-background-color: AZURE;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.Controladores.ControllerPersonaje">
    <children>
-      <ImageView fitHeight="540.0" fitWidth="454.0" layoutX="57.0" layoutY="22.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="540.0" fitWidth="454.0" layoutX="57.0" layoutY="22.0" opacity="0.53" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/fondo2.jpg" />
          </image>
+         <effect>
+            <GaussianBlur radius="5.39">
+               <input>
+                  <Lighting diffuseConstant="2.0" specularConstant="1.44" specularExponent="17.07" surfaceScale="0.0">
+                     <bumpInput>
+                        <Shadow radius="4.75" width="0.0" />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </input>
+            </GaussianBlur>
+         </effect>
       </ImageView>
       <Text fx:id="crearLabel" layoutX="118.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Crear nuevo personaje">
          <font>
@@ -50,49 +65,49 @@
             <Font name="Gabriola" size="22.0" />
          </font>
       </Text>
-      <TextField fx:id="nombreTF" layoutX="270.0" layoutY="85.0">
+      <TextField fx:id="nombreTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="85.0">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <TextField fx:id="ataqueTF" layoutX="270.0" layoutY="135.0">
+      <TextField fx:id="ataqueTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="135.0">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <TextField fx:id="vidaTF" layoutX="270.0" layoutY="185.0">
+      <TextField fx:id="vidaTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="185.0">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <TextField fx:id="camposTF" layoutX="270.0" layoutY="235.0">
+      <TextField fx:id="camposTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="235.0">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <TextField fx:id="nivelAparTF" layoutX="270.0" layoutY="285.0">
+      <TextField fx:id="nivelAparTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="285.0">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <TextField fx:id="costoTF" layoutX="270.0" layoutY="335.0">
+      <TextField fx:id="costoTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="335.0">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <Button layoutX="21.0" layoutY="447.0" mnemonicParsing="false" onAction="#agregarNiveles" text="AGREGAR NIVELES">
+      <Button blendMode="MULTIPLY" layoutX="21.0" layoutY="447.0" mnemonicParsing="false" onAction="#agregarNiveles" text="AGREGAR NIVELES">
          <font>
-            <Font name="Gabriola" size="21.0" />
+            <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
       <ImageView fx:id="salir" fitHeight="46.0" fitWidth="45.0" layoutX="488.0" layoutY="15.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/salir.png" />
          </image>
       </ImageView>
-      <Button fx:id="agregarBut" layoutX="157.0" layoutY="508.0" mnemonicParsing="false" text="AGREGAR PERSONAJE NUEVO">
+      <Button fx:id="agregarBut" blendMode="MULTIPLY" layoutX="168.0" layoutY="503.0" mnemonicParsing="false" text="AGREGAR PERSONAJE NUEVO">
          <font>
-            <Font name="Gabriola" size="21.0" />
+            <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
       <Text layoutX="21.0" layoutY="407.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Armas">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font>
       </Text>
-      <ComboBox layoutX="268.0" layoutY="385.0" prefHeight="43.0" prefWidth="214.0" />
+      <ComboBox blendMode="MULTIPLY" layoutX="268.0" layoutY="385.0" prefHeight="43.0" prefWidth="214.0" />
       <ImageView fitHeight="43.0" fitWidth="27.0" layoutX="501.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/mas.png" />

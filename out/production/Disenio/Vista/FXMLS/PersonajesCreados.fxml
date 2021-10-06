@@ -10,19 +10,32 @@
 
 <Pane fx:id="contenedor" prefHeight="526.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.Controladores.PersonajesCreados">
    <children>
-      <ImageView fitHeight="578.0" fitWidth="933.0" layoutY="-1.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="578.0" fitWidth="933.0" layoutY="-1.0" opacity="0.46" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/fondo5.png" />
          </image>
+         <effect>
+            <GaussianBlur>
+               <input>
+                  <Lighting diffuseConstant="2.0" specularConstant="1.13">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </input></GaussianBlur>
+         </effect>
       </ImageView>
-      <Text fx:id="armasL" layoutX="371.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Armas creadas" visible="false">
+      <Text fx:id="armasL" layoutX="367.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Armas creadas" visible="false">
          <font>
-            <Font size="30.0" />
+            <Font name="Harrington" size="30.0" />
          </font>
       </Text>
-      <Button layoutX="668.0" layoutY="96.0" mnemonicParsing="false" onAction="#modificar" text="MODIFICAR">
+      <Button blendMode="MULTIPLY" layoutX="669.0" layoutY="91.0" mnemonicParsing="false" onAction="#modificar" prefHeight="49.0" prefWidth="129.0" text="MODIFICAR">
          <font>
-            <Font name="Gabriola" size="20.0" />
+            <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
       <ImageView fitHeight="49.0" fitWidth="64.0" layoutX="867.0" layoutY="9.0" onMouseClicked="#salir" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -34,14 +47,14 @@
             <Font name="Harrington" size="30.0" />
          </font>
       </Text>
-      <ComboBox fx:id="nombresPersonajes" layoutX="252.0" layoutY="96.0" prefHeight="40.0" prefWidth="230.0" />
+      <ComboBox fx:id="nombresPersonajes" blendMode="MULTIPLY" layoutX="252.0" layoutY="96.0" prefHeight="40.0" prefWidth="230.0" />
       <Text layoutX="177.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
          <font>
             <Font name="Gabriola" size="26.0" />
          </font></Text>
-      <Button layoutX="518.0" layoutY="96.0" mnemonicParsing="false" onAction="#verDetalles" text="VER DETALLES">
+      <Button blendMode="MULTIPLY" layoutX="523.0" layoutY="91.0" mnemonicParsing="false" onAction="#verDetalles" text="VER DETALLES">
          <font>
-            <Font name="Gabriola" size="20.0" />
+            <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
       <Line endX="300.0" layoutX="367.0" layoutY="159.0" startX="-100.0" stroke="#3187b2" strokeWidth="3.0" />
       <Pane fx:id="detalles" layoutY="172.0" prefHeight="356.0" prefWidth="933.0" visible="false">
@@ -99,11 +112,11 @@
                <font>
                   <Font name="Gabriola" size="21.0" />
                </font></Text>
-            <ImageView fitHeight="215.0" fitWidth="253.0" layoutX="392.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="215.0" fitWidth="253.0" layoutX="662.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="621.0" layoutY="309.0" mnemonicParsing="false" text="Siguiente">
+            <ImageView fitHeight="200.0" fitWidth="253.0" layoutX="392.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="200.0" fitWidth="253.0" layoutX="662.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
+            <Button blendMode="MULTIPLY" layoutX="618.0" layoutY="298.0" mnemonicParsing="false" text="Siguiente">
                <font>
-                  <Font name="Gabriola" size="21.0" />
+                  <Font name="Bodoni MT Poster Compressed" size="26.0" />
                </font></Button>
             <Text layoutX="237.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER">
                <font>
@@ -176,9 +189,9 @@
                </font>
             </Text>
             <ImageView fitHeight="222.0" fitWidth="313.0" layoutX="509.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
-            <Button layoutX="622.0" layoutY="287.0" mnemonicParsing="false" text="Siguiente">
+            <Button blendMode="MULTIPLY" layoutX="622.0" layoutY="287.0" mnemonicParsing="false" text="Siguiente">
                <font>
-                  <Font name="Gabriola" size="21.0" />
+                  <Font name="Bodoni MT Poster Compressed" size="25.0" />
                </font></Button>
          </children></Pane>
    </children>
