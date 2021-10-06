@@ -61,7 +61,6 @@ public class CreadorDePersonajes {
 
     ////////////////////////////////////////////////////Metodos de BuilderPersonaje////////////////////////////////////////////////////
 
-    //TODO:Implementar en GUI
     public void addBuilderPersonaje() {
         this.currentBuilding = new Personaje.BuilderPersonaje();
     }
@@ -80,13 +79,12 @@ public class CreadorDePersonajes {
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setCampos(campos);
     }
-    //TODO:Implementar en GUI
-    public void setCamposCurrentPersonaje(float costo){
+
+    public void setCamposCostoPersonaje(float costo){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setCosto(costo);
     }
 
-    //TODO: Cambiar en clase
     public void setAtaqueCurrentPersonaje(int golpes){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setCantGolpesRecibos(golpes);
@@ -96,17 +94,19 @@ public class CreadorDePersonajes {
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setVida(vida);
     }
-    //TODO:Implementar en GUI
+
     public void agregarArmaCurrentPersonaje(Arma arma){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.addArma(arma);
     }
-    //TODO:Implementar en GUI
+
     public void addAparienciaBuilderPersonaje(int nivel,String accion,ArrayList<String> imagenes){
         LvlImages imagenPorAccion = new LvlImages(accion,imagenes);
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.addApariencia(nivel,imagenPorAccion);
     }
+
+
 
 
     //TODO:Implementar en GUI

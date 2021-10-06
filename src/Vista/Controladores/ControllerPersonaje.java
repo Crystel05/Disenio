@@ -1,6 +1,7 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import Modelo.Arma;
 import Vista.ControllerComun;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,15 +115,16 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
         if (!nombreTF.getText().isEmpty()){
             setNombre();
             if (!ataqueTF.getText().isEmpty())
-                System.out.println();
+                setAtaque();
             if (!vidaTF.getText().isEmpty())
-                System.out.println();
+                setVida();
             if (!camposTF.getText().isEmpty())
-                System.out.println();
+                setCampos();
             if (!nivelAparTF.getText().isEmpty())
-                System.out.println();
+                setNivel();
             if (!costoTF.getText().isEmpty())
-                System.out.println();
+                setCosto();
+            comun.getControlador().buildCurrentPersonaje();
         }else{
             System.out.println("Tiene que tener nombre");
         }
@@ -147,13 +149,18 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
 
     public void setVida() { comun.getControlador().setVidaCurrentPersonaje(Integer.parseInt(vidaTF.getText()));}
 
+    public void setCosto(){
+        comun.getControlador().setCamposCostoPersonaje(Float.parseFloat(costoTF.getText()));
+    }
+
+    //TODO: Cuando viene con una nueva o con una reutilizada
+    public void addArma(Arma arma){
+        comun.getControlador().agregarArmaCurrentPersonaje(arma);
+    }
+
     @Override
     public void loadImages(String accion, ArrayList<String> images) {
         comun.getControlador().addAparienciaBuilderPersonaje(Integer.parseInt(nivelAparTF.getText()),accion,images);
     }
 
-//    public void setArma()
-//    { comun.getControlador().agreg
-//    arArm
-//    aCurrentPersonaje;}
 }
