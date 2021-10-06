@@ -67,11 +67,11 @@
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></TextField>
-      <Button blendMode="MULTIPLY" layoutX="79.0" layoutY="297.0" mnemonicParsing="false" text="Agregar imagen">
+      <Button blendMode="MULTIPLY" layoutX="79.0" layoutY="297.0" mnemonicParsing="false" onAction="#niveles" text="Agregar imagen">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
-      <Button fx:id="agregarB" blendMode="MULTIPLY" layoutX="218.0" layoutY="363.0" mnemonicParsing="false" text="Agregar nueva arma">
+      <Button fx:id="agregarB" blendMode="MULTIPLY" layoutX="218.0" layoutY="363.0" mnemonicParsing="false" onAction="#crearArma" text="Agregar nueva arma">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
@@ -79,10 +79,6 @@
          <image>
             <Image url="@../Imagenes/salir.png" />
          </image></ImageView>
-      <Text layoutX="299.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel 1">
-         <font>
-            <Font name="Gabriola" size="22.0" />
-         </font></Text>
       <ImageView fx:id="cerrar2" fitHeight="40.0" fitWidth="51.0" layoutX="493.0" layoutY="14.0" onMouseClicked="#salir2" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../Imagenes/salir.png" />
@@ -98,5 +94,10 @@
             <Font name="Gabriola" size="22.0" />
          </font>
       </Button>
+      <TextField fx:id="nivelArmaTF" blendMode="MULTIPLY" layoutX="230.0" layoutY="295.0">
+         <font>
+            <Font name="Gabriola" size="22.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

@@ -1,6 +1,7 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
 import Vista.ControllerComun;
@@ -108,7 +109,7 @@ public class PersonajesCreados implements Initializable, DragWindow {
 
         try {
             ObservableList<String> personajes = FXCollections.observableArrayList();
-            ArrayList<String> nombres = PrototypeFactory.getAllKeys();
+            ArrayList<String> nombres = PrototypeFactory.getAllKeys(EnumPrototypes.PERSONAJES);
             personajes.addAll(nombres);
             nombresPersonajes.setItems(personajes);
         }

@@ -27,10 +27,10 @@ public class MainTester {
         Personaje p1 = new Personaje.BuilderPersonaje().setNombre("Perro").setApariencia(managerApariencia).setCampos(10).setCantGolpesRecibos(6).setNivel(2000).build();
         //System.out.println(p1.toString());
 
-        PrototypeFactory.addItem("p1",p1);
+       // PrototypeFactory.addItem("p1",p1);
 
         //Escritor
-        ProcesadorSerializable.fileWriter(PrototypeFactory.getHash(), "prototypesDataBase.ser");
+       // ProcesadorSerializable.fileWriter(PrototypeFactory.getHash(), "prototypesDataBase.ser");
 
         //Lector
         HashMap<String, IPrototype> loaded = ProcesadorSerializable.fileReader("prototypesDataBase.ser");

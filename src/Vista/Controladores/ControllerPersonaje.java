@@ -18,9 +18,10 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ControllerPersonaje implements Initializable, DragWindow {
+public class ControllerPersonaje implements Initializable, DragWindow,ILoadImages {
 
     //TODO:Cuando se cargue la pantalla hay que llamar al metodo que creaa el builder.
     private final ControllerComun comun = ControllerComun.getInstance();
@@ -73,6 +74,7 @@ public class ControllerPersonaje implements Initializable, DragWindow {
     @FXML
     public void agregarNiveles(ActionEvent event) throws IOException {
         comun.abrirVentana("FXMLS/escogerNiveles.fxml");
+        //TODO:Como pasar el tipo de pantalla al controllerNiveles?
     }
 
     @FXML
@@ -144,6 +146,11 @@ public class ControllerPersonaje implements Initializable, DragWindow {
     public void setAtaque(){ comun.getControlador().setAtaqueCurrentPersonaje(Integer.parseInt(ataqueTF.getText()));}
 
     public void setVida() { comun.getControlador().setVidaCurrentPersonaje(Integer.parseInt(vidaTF.getText()));}
+
+    @Override
+    public void loadImages(String accion, ArrayList<String> images) {
+        comun.getControlador().addAparienciaBuilderPersonaje(Integer.parseInt(nivelAparTF.getText()),accion,images);
+    }
 
 //    public void setArma()
 //    { comun.getControlador().agreg

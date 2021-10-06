@@ -74,6 +74,10 @@
          <font>
             <Font name="Gabriola" size="20.0" />
          </font></TextField>
-      <ComboBox blendMode="MULTIPLY" layoutX="230.0" layoutY="268.0" prefHeight="40.0" prefWidth="195.0" promptText="cargar archivo" />
+      <Button fx:id="crearB111" blendMode="MULTIPLY" layoutX="242.0" layoutY="259.0" mnemonicParsing="false" onAction="#cargarRuta" text="CARGAR ARCHIVO">
+         <font>
+            <Font name="Bodoni MT Poster Compressed" size="26.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

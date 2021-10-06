@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.Apariencia.LvlImages;
 import Modelo.Arma;
 import Modelo.BuilderPattern.IBuilder;
+import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
 import Modelo.PrototypePattern.IPrototype;
@@ -11,32 +12,29 @@ import java.util.ArrayList;
 
 public class CreadorDePersonajes {
 
-    ArrayList<String> currentImages;
 
     IBuilder currentBuilding;
 
-    public CreadorDePersonajes(){
-        currentImages = new ArrayList<>();
-    }
 
     ////////////////////////////////////////////////////Metodos de clonacion////////////////////////////////////////////////////
 
 
-//    public ArrayList<Personaje> getClonesPersonajes(int clones,String nombre){
-//        ArrayList<Personaje> listaDeClones = new ArrayList<>();
-//        for(IPrototype prototype: PrototypeFactory.get(clones,nombre)){
-//            listaDeClones.add((Personaje) prototype);
-//        }
-//        return listaDeClones;
-//    }
-//
-//    public ArrayList<Arma> getClonesArmas(int clones,String nombre){
-//        ArrayList<Arma> listaDeClones = new ArrayList<>();
-//        for(IPrototype prototype: PrototypeFactory.get(clones,nombre)){
-//            listaDeClones.add((Arma) prototype);
-//        }
-//        return listaDeClones;
-//    }
+    public ArrayList<Personaje> getClonesPersonajes(int clones,String nombre){
+        ArrayList<Personaje> listaDeClones = new ArrayList<>();
+        for(IPrototype prototype: PrototypeFactory.getItem(nombre,clones,EnumPrototypes.PERSONAJES)){
+            listaDeClones.add((Personaje) prototype);
+        }
+        return listaDeClones;
+    }
+
+    public ArrayList<Arma> getClonesArmas(int clones,String nombre) {
+        ArrayList<Arma> listaDeClones = new ArrayList<>();
+        for (IPrototype prototype : PrototypeFactory.getItem(nombre, clones, EnumPrototypes.ARMAS)) {
+            listaDeClones.add((Arma) prototype);
+        }
+        return listaDeClones;
+
+    }
 
     //TODO:Validacion tonta para usar el resto de metodos
     //Usar en interfaz para controlar que entra al Prototype. Que pasa con un build de nombre vacio?
@@ -104,15 +102,17 @@ public class CreadorDePersonajes {
         this.currentBuilding = nowBuilding.addArma(arma);
     }
     //TODO:Implementar en GUI
-    public void setVidaCurrentPersonaje(int nivel,String accion,ArrayList<String> imagenes){
+    public void addAparienciaBuilderPersonaje(int nivel,String accion,ArrayList<String> imagenes){
         LvlImages imagenPorAccion = new LvlImages(accion,imagenes);
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.addApariencia(nivel,imagenPorAccion);
     }
+
+
     //TODO:Implementar en GUI
     public Personaje buildCurrentPersonaje(){
         Personaje nuevoPersonaje = (Personaje)currentBuilding.build();
-        PrototypeFactory.addItem(nuevoPersonaje.getNombre(),nuevoPersonaje);
+        PrototypeFactory.addItem(nuevoPersonaje.getNombre(),nuevoPersonaje,EnumPrototypes.PERSONAJES);
         return nuevoPersonaje;
     }
 
@@ -144,35 +144,17 @@ public class CreadorDePersonajes {
         this.currentBuilding = nowBuilding.setRangoExplosion(rangoExplosion);
     }
 
-    public void addAparienciaArma(int nivel,String accion)
+    public void addAparienciaArma(int nivel,String accion,ArrayList<String> currentImages)
     {
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.addApariencia(nivel,accion,currentImages);
     }
 
-    //TODO:Implementar en GUI
     public Arma buildCurrentArma(){
         Arma arma = (Arma)this.currentBuilding;
-        PrototypeFactory.addItem(arma.getNombre(),arma);
+        PrototypeFactory.addItem(arma.getNombre(),arma, EnumPrototypes.ARMAS);
         return arma;
     }
 
-    ////////////////////////////////////////////////////Metodos de Manejo de imagenes//////////////////////////////////////////////////
-    //Cuando se estan agregando las imagenes en el builder. Para no agregar de una en una en el builder sino que meterlas por accion
-    //Se tiene este array de imagenes que tiene las imagenes que se han cargado hasta el momento. Cuando se cree el grupo de imagenes por nivel y accion entonces se agrega al builder
-    public void addToCurrentImages(String url){
-        currentImages.add(url);
-    }
-    public void clearImages(){
-        currentImages = new ArrayList<>();
-    }
-    public void removeLast(){
-        if(!currentImages.isEmpty())
-        currentImages.remove(currentImages.size()-1);
-    }
 
-    //Validacion
-    public boolean areImages(){
-        return currentImages.size() != 0;
-    }
 }

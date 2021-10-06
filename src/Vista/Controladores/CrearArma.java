@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class CrearArma implements Initializable, DragWindow {
@@ -80,17 +81,13 @@ public class CrearArma implements Initializable, DragWindow {
     @FXML
     public void crearArma(){
         if (!nombreArma.getText().isEmpty()){
-            //set nombre
+            setName();
             if (!alcanceArma.getText().isEmpty())
-                //set alcance
-                System.out.println();
+                setAlcance();
             if (!dannoArma.getText().isEmpty())
-                //set daño
-                System.out.println();
+                setDano();
             if (!rangoExplosionArma.getText().isEmpty())
-                //set rango explosion
-                System.out.println();
-
+                setRango();
             comun.getControlador().buildCurrentArma();
         }else {
             System.out.println("Tiene que tener nombre");
@@ -134,7 +131,9 @@ public class CrearArma implements Initializable, DragWindow {
     public void setRango(){
         comun.getControlador().setRangoBuilderArma(Integer.parseInt(rangoExplosionArma.getText()));
     }
-    public void addAparienciaArma(String nivel,String nombre){
-        comun.getControlador().addAparienciaArma(Integer.parseInt(nivel),nombre);
+
+    //Este metodo es usado por el controlador de la pantalla de crear nivel
+    public void loadImages(String nombre, ArrayList<String> currentImages){
+        comun.getControlador().addAparienciaArma(Integer.parseInt(nivelAparienciaTF.getText()),nombre,currentImages);
     }
 }

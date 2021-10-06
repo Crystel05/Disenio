@@ -24,14 +24,15 @@ public class ControllerComun {
     private CreadorDePersonajes controladorLogico;
     private boolean modificado;
     private boolean armas;
-    private static ControllerComun controllerComun;
-    private String rutaDirectorio;
+    private static ControllerComun controllerComun ;
+    private String rutaDirectorio = "\\Directorio";
 
     public ControllerComun(){}
 
     public static ControllerComun getInstance(){
         if(controllerComun == null){
             controllerComun = new ControllerComun();
+            controllerComun.controladorLogico = new CreadorDePersonajes();
         }
         return controllerComun;
     }
