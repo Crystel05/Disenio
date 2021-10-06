@@ -22,21 +22,21 @@ public class CreadorDePersonajes {
     ////////////////////////////////////////////////////Metodos de clonacion////////////////////////////////////////////////////
 
 
-    public ArrayList<Personaje> getClonesPersonajes(int clones,String nombre){
-        ArrayList<Personaje> listaDeClones = new ArrayList<>();
-        for(IPrototype prototype: PrototypeFactory.get(clones,nombre)){
-            listaDeClones.add((Personaje) prototype);
-        }
-        return listaDeClones;
-    }
-
-    public ArrayList<Arma> getClonesArmas(int clones,String nombre){
-        ArrayList<Arma> listaDeClones = new ArrayList<>();
-        for(IPrototype prototype: PrototypeFactory.get(clones,nombre)){
-            listaDeClones.add((Arma) prototype);
-        }
-        return listaDeClones;
-    }
+//    public ArrayList<Personaje> getClonesPersonajes(int clones,String nombre){
+//        ArrayList<Personaje> listaDeClones = new ArrayList<>();
+//        for(IPrototype prototype: PrototypeFactory.get(clones,nombre)){
+//            listaDeClones.add((Personaje) prototype);
+//        }
+//        return listaDeClones;
+//    }
+//
+//    public ArrayList<Arma> getClonesArmas(int clones,String nombre){
+//        ArrayList<Arma> listaDeClones = new ArrayList<>();
+//        for(IPrototype prototype: PrototypeFactory.get(clones,nombre)){
+//            listaDeClones.add((Arma) prototype);
+//        }
+//        return listaDeClones;
+//    }
 
     //TODO:Validacion tonta para usar el resto de metodos
     //Usar en interfaz para controlar que entra al Prototype. Que pasa con un build de nombre vacio?
@@ -67,12 +67,12 @@ public class CreadorDePersonajes {
     public void addBuilderPersonaje() {
         this.currentBuilding = new Personaje.BuilderPersonaje();
     }
-    //TODO:Implementar en GUI
+
     public void setNameBuilderPersonaje(String nombre){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setNombre(nombre);
     }
-    //TODO:Implementar en GUI
+
     public void setNivelCurrentPersonaje(int nivel){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setNivel(nivel);
@@ -128,7 +128,7 @@ public class CreadorDePersonajes {
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.setNombre(nombre);
     }
-    //TODO:Implementar en GUI
+
     public void setAlcanceBuilderArma(int alcance){
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.setAlcance(alcance);

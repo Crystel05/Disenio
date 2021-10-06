@@ -1,6 +1,7 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import FileManager.ProcesadorSerializable;
 import Vista.ControllerComun;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +11,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -45,7 +49,10 @@ public class ControllerPrincipal implements Initializable, DragWindow {
 
     @FXML
     public void crear(ActionEvent event) throws IOException {
-        if (!rutaDirectorio.getText().isEmpty()) {
+        if (!rutaDirectorio.getText().isEmpty() && !comun.getRutaDirectorio().isEmpty()) {
+            comun.setRutaDirectorio(rutaDirectorio.getText());
+        }
+        if (!comun.getRutaDirectorio().isEmpty()){
             if (armaRB.isSelected() || personajeRB.isSelected()) {
                 Node source = (Node) event.getSource();
                 Stage stageActual = (Stage) source.getScene().getWindow();
@@ -58,6 +65,13 @@ public class ControllerPrincipal implements Initializable, DragWindow {
                 }
             }
         }
+
+//        if (!comun.getRutaDirectorio().isEmpty()) {
+//            if (!rutaDirectorio.getText().isEmpty()) {
+//                comun.setRutaDirectorio(rutaDirectorio.getText());
+
+//            }
+//        }
     }
 
     @FXML
@@ -76,6 +90,16 @@ public class ControllerPrincipal implements Initializable, DragWindow {
         stageActual.close();
         comun.setArmas(true);
         comun.abrirVentana("FXMLS/PersonajesCreados.fxml");
+    }
+
+    @FXML
+    public void cargarRuta(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Escoger ruta");
+        Node source = (Node) event.getSource();
+        Stage stageActual = (Stage) source.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stageActual);
+        comun.setRutaDirectorio(file.getAbsolutePath());
     }
 
     @FXML

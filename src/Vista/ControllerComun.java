@@ -25,6 +25,8 @@ public class ControllerComun {
     private boolean modificado;
     private boolean armas;
     private static ControllerComun controllerComun;
+    private String rutaDirectorio;
+
     public ControllerComun(){}
 
     public static ControllerComun getInstance(){
@@ -50,6 +52,14 @@ public class ControllerComun {
         this.armas = armas;
     }
 
+    public String getRutaDirectorio() {
+        return rutaDirectorio;
+    }
+
+    public void setRutaDirectorio(String rutaDirectorio) {
+        this.rutaDirectorio = rutaDirectorio;
+    }
+
     public void cerrar(MouseEvent event, Boolean atras){
         Node source = (Node) event.getSource();
         Stage stageActual = (Stage) source.getScene().getWindow();
@@ -69,13 +79,13 @@ public class ControllerComun {
     }
 
 
-
-
-   /* public CreadorDePersonajes getControlador(){
+    public CreadorDePersonajes getControlador(){
         return this.controladorLogico;
     }
 
     public void agregarControlador(CreadorDePersonajes controladorLogico){
         this.controladorLogico = controladorLogico;
-    }*/
+    }
+
+
 }

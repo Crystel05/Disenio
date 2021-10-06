@@ -88,4 +88,12 @@ public class CrearArma implements Initializable, DragWindow {
     public void onDraggedScene(Pane panelFather) {
         DragWindow.super.onDraggedScene(panelFather);
     }
+
+    public void setName(){
+        comun.getControlador().setNameBuilderArma(nombreArma.getText());
+    }
+    public void setAlcance(){
+        comun.getControlador().setAlcanceBuilderArma(String.valueOf(alcanceArma.getText()));
+    }
+    public void comun.getControlador().setdanosetDano(){}
 }

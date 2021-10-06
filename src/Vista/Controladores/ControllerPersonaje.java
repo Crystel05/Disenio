@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class ControllerPersonaje implements Initializable, DragWindow {
 
+    //TODO:Cuando se cargue la pantalla hay que llamar al metodo que creaa el builder.
     private final ControllerComun comun = ControllerComun.getInstance();
 
     @FXML
@@ -75,6 +76,7 @@ public class ControllerPersonaje implements Initializable, DragWindow {
     }
 
     public void crearPersonaje(){
+            //TODO:sI NO HAY NOMBRE NO PUEDE CREAR.
         //comun.getControlador().
     }
 
@@ -102,6 +104,18 @@ public class ControllerPersonaje implements Initializable, DragWindow {
         }
     }
 
+    @FXML
+    public void agregarNuevo(ActionEvent event){
+        if (!nombreTF.getText().isEmpty()){
+            setNombre();
+            if (!ataqueTF.getText().isEmpty())
+                System.out.println();
+            if ()
+        }else{
+            System.out.println("Tiene que tener nombre");
+        }
+    }
+
     @Override
     public void onDraggedScene(Pane panelFather) {
         DragWindow.super.onDraggedScene(panelFather);
@@ -110,4 +124,18 @@ public class ControllerPersonaje implements Initializable, DragWindow {
     public void cerrar2(MouseEvent event) throws IOException {
         comun.cerrar(event, true);
     }
+
+    public void setNombre()     comun.getControlador().setNameBuilderPersonaje(nombreTF.getText());
+    }
+
+    public void setNivel(){
+        comun.getControlador().setNivelCurrentPersString.valueOfnivelAparTF.getText()));
+
+    }
+
+    public void setCampos(){
+        comun.getControlador().setCamposCurrentPersonaje(Integer.parseInt(camposTF.getText()));
+    }
+
+
 }
