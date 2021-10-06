@@ -1,19 +1,29 @@
 package Vista;
 
 import Controlador.CreadorDePersonajes;
+import Modelo.Apariencia.ManagerApariencia;
+import Modelo.FactoryPattern.PrototypeFactory;
+import Modelo.Personaje;
+import Modelo.PrototypePattern.IPrototype;
+import Modelo.WeaponManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ControllerComun {
 
     private CreadorDePersonajes controladorLogico;
+    private boolean modificado;
+    private boolean armas;
     private static ControllerComun controllerComun;
     public ControllerComun(){}
 
@@ -22,6 +32,22 @@ public class ControllerComun {
             controllerComun = new ControllerComun();
         }
         return controllerComun;
+    }
+
+    public boolean isModificado() {
+        return modificado;
+    }
+
+    public void setModificado(boolean modificado) {
+        this.modificado = modificado;
+    }
+
+    public boolean isArmas() {
+        return armas;
+    }
+
+    public void setArmas(boolean armas) {
+        this.armas = armas;
     }
 
     public void cerrar(MouseEvent event, Boolean atras){
@@ -42,11 +68,14 @@ public class ControllerComun {
         stage.show();
     }
 
-    public CreadorDePersonajes getControlador(){
+
+
+
+   /* public CreadorDePersonajes getControlador(){
         return this.controladorLogico;
     }
 
     public void agregarControlador(CreadorDePersonajes controladorLogico){
         this.controladorLogico = controladorLogico;
-    }
+    }*/
 }
