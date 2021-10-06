@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class Arma implements IPrototype<Arma> {
 
-    //Clase defaultnames puede ser configuracion para asignar los elementos por default
     String nombre;
     int alcance;
     int dano;
     int nivel;
     int rangoExplosion;
+    int municion;
     ManagerApariencia apariencia;
 
     public Arma(String nombre, int alcance, int dano, int nivel, int rangoExplosion, ManagerApariencia apariencia){
@@ -24,16 +24,32 @@ public class Arma implements IPrototype<Arma> {
         this.nivel = nivel;
         this.rangoExplosion = rangoExplosion;
         this.apariencia = apariencia;
+        this.municion = 0;
     }
 
-    //TODO:Pendiente ajustar el builder del arma para que pueda retornarse para modificaciones.
+
+
     public static class BuilderArma implements IBuilder<Arma> {
         String nombre;
         int alcance;
         int dano;
         int nivel;
         int rangoExplosion;
+        int municion;
         ManagerApariencia apariencia;
+
+        public BuilderArma(){
+
+        }
+
+        public BuilderArma(Arma arma) {
+            this.nombre = arma.nombre;
+            this.apariencia = arma.apariencia.deepClone();
+            this.dano = arma.dano;
+            this.nivel = arma.nivel;
+            this.rangoExplosion = arma.rangoExplosion;
+            this.municion = arma.municion;
+        }
 
         public BuilderArma setNombre(String nombre){
             this.nombre = nombre;
@@ -68,6 +84,10 @@ public class Arma implements IPrototype<Arma> {
             this.apariencia.addApariencia(nivel,nombre,imagenes);
             return  this;
         }
+        public BuilderArma setMunicion(int municion){
+            this.municion = municion;
+            return  this;
+        }
 
         @Override
         public Arma build() {
@@ -90,6 +110,32 @@ public class Arma implements IPrototype<Arma> {
     public int getRangoExplosion() {
         return rangoExplosion;
     }
+    public int getMunicion(){return  municion;}
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setAlcance(int alcance) {
+        this.alcance = alcance;
+    }
+
+    public void setDano(int dano) {
+        this.dano = dano;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+
+    public void setRangoExplosion(int rangoExplosion) {
+        this.rangoExplosion = rangoExplosion;
+    }
+
+    public void setMunicion(int municion) {
+        this.municion = municion;
+    }
+
     public ManagerApariencia getApariencia() {
         return apariencia;
     }
@@ -116,4 +162,7 @@ public class Arma implements IPrototype<Arma> {
         return copiaArma;
     }
 
+    public BuilderArma getBuildable(){
+        return new BuilderArma(this);
+    }
 }

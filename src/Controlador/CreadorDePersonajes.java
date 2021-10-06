@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class CreadorDePersonajes {
 
     ArrayList<String> currentImages;
+
     IBuilder currentBuilding;
 
     //TODO:Agregar metodos de creacion sin builder/Modificaciones/Clonaciones
@@ -19,6 +20,7 @@ public class CreadorDePersonajes {
     ///Modificacion a partir de un personaje
 
     //TODO:Cambiar nombre
+    //El metodo se crea porque el contralador solo maneje una referencia a builder y asi no haya que agregar nada mas y todo funcione como una sola cosa.
     public void createFromExistente(Personaje personaje){
         //A partir de este ya se puede usar el builder como si fuerea desde cero.
         //Hacer tambien esto para las armas.
@@ -119,7 +121,11 @@ public class CreadorDePersonajes {
         Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
         this.currentBuilding = nowBuilding.addApariencia(nivel,imagenPorAccion);
     }
-
+    //TODO:Implementar en GUI
+    public void setMunicion(int municion){
+        Arma.BuilderArma nowBuilding = (Arma.BuilderArma) currentBuilding;
+        this.currentBuilding = nowBuilding.setMunicion(municion);
+    }
     //TODO:Implementar en GUI
     public Arma buildCurrentArma(){
         Arma arma = (Arma)this.currentBuilding;
