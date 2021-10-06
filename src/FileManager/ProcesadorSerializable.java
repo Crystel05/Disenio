@@ -10,15 +10,15 @@ public class ProcesadorSerializable {
 
     public ProcesadorSerializable() {}
 
-    public static void fileWriter(HashMap<String, IPrototype> prototipos) {
+    public static void fileWriter(HashMap<String, IPrototype> prototipos, String path) {
 
         try {
-            FileOutputStream fileOut = new FileOutputStream("prototypesDataBase.ser");
+            FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(prototipos);
             out.close();
             fileOut.close();
-            System.out.println("Database saved successfully");
+            System.out.println("Database saved successfully at: " + path);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -37,7 +37,7 @@ public class ProcesadorSerializable {
             prototipos = (HashMap<String, IPrototype>) in.readObject();
             in.close();
             fileIn.close();
-            System.out.println("Loaded DataBase successfully");
+            System.out.println("Loaded DataBase successfully from: " + path);
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {

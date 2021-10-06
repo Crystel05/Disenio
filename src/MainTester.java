@@ -30,7 +30,7 @@ public class MainTester {
         PrototypeFactory.addItem("p1",p1);
 
         //Escritor
-        ProcesadorSerializable.fileWriter(PrototypeFactory.getHash());
+        ProcesadorSerializable.fileWriter(PrototypeFactory.getHash(), "prototypesDataBase.ser");
 
         //Lector
         HashMap<String, IPrototype> loaded = ProcesadorSerializable.fileReader("prototypesDataBase.ser");
