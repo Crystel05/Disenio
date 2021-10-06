@@ -77,7 +77,7 @@ public class CreadorDePersonajes {
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setNivel(nivel);
     }
-    //TODO:Implementar en GUI
+
     public void setCamposCurrentPersonaje(int campos){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setCampos(campos);
@@ -87,13 +87,13 @@ public class CreadorDePersonajes {
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setCosto(costo);
     }
-    //TODO:Implementar en GUI
+
     //TODO: Cambiar en clase
     public void setAtaqueCurrentPersonaje(int golpes){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setCantGolpesRecibos(golpes);
     }
-    //TODO:Implementar en GUI
+
     public void setVidaCurrentPersonaje(int vida){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.setVida(vida);

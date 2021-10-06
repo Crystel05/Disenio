@@ -2,10 +2,13 @@ package Vista.Controladores;
 
 import Controlador.DragWindow;
 import Vista.ControllerComun;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -65,6 +68,9 @@ public class ControllerPersonaje implements Initializable, DragWindow {
     private TextField nivelAparTF;
 
     @FXML
+    private ComboBox<String> armasPersonaje;
+
+    @FXML
     public void agregarNiveles(ActionEvent event) throws IOException {
         comun.abrirVentana("FXMLS/escogerNiveles.fxml");
     }
@@ -75,16 +81,13 @@ public class ControllerPersonaje implements Initializable, DragWindow {
         comun.abrirVentana("FXMLS/principal.fxml");
     }
 
-    public void crearPersonaje(){
-            //TODO:sI NO HAY NOMBRE NO PUEDE CREAR.
-        //comun.getControlador().
-    }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.onDraggedScene(contenedor);
-        System.out.println(comun.isModificado()+"\n");
+        comun.getControlador().addBuilderPersonaje();
+        ObservableList armas = FXCollections.observableArrayList();
+        //TODO: get keys de armas
+        armasPersonaje.setItems(armas);
         if (comun.isModificado()){
             nombreTF.setDisable(true);
             salir2.setVisible(true);
@@ -110,7 +113,14 @@ public class ControllerPersonaje implements Initializable, DragWindow {
             setNombre();
             if (!ataqueTF.getText().isEmpty())
                 System.out.println();
-            if ()
+            if (!vidaTF.getText().isEmpty())
+                System.out.println();
+            if (!camposTF.getText().isEmpty())
+                System.out.println();
+            if (!nivelAparTF.getText().isEmpty())
+                System.out.println();
+            if (!costoTF.getText().isEmpty())
+                System.out.println();
         }else{
             System.out.println("Tiene que tener nombre");
         }
@@ -125,17 +135,18 @@ public class ControllerPersonaje implements Initializable, DragWindow {
         comun.cerrar(event, true);
     }
 
-    public void setNombre()     comun.getControlador().setNameBuilderPersonaje(nombreTF.getText());
-    }
+    public void setNombre(){ comun.getControlador().setNameBuilderPersonaje(nombreTF.getText());}
 
-    public void setNivel(){
-        comun.getControlador().setNivelCurrentPersString.valueOfnivelAparTF.getText()));
+    public void setNivel(){ comun.getControlador().setNivelCurrentPersonaje(Integer.parseInt(nivelAparTF.getText()));}
 
-    }
+    public void setCampos(){ comun.getControlador().setCamposCurrentPersonaje(Integer.parseInt(camposTF.getText())); }
 
-    public void setCampos(){
-        comun.getControlador().setCamposCurrentPersonaje(Integer.parseInt(camposTF.getText()));
-    }
+    public void setAtaque(){ comun.getControlador().setAtaqueCurrentPersonaje(Integer.parseInt(ataqueTF.getText()));}
 
+    public void setVida() { comun.getControlador().setVidaCurrentPersonaje(Integer.parseInt(vidaTF.getText()));}
 
+//    public void setArma()
+//    { comun.getControlador().agreg
+//    arArm
+//    aCurrentPersonaje;}
 }

@@ -2,6 +2,7 @@ package Vista.Controladores;
 
 import Controlador.DragWindow;
 import Vista.ControllerComun;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,6 +30,9 @@ public class CrearArma implements Initializable, DragWindow {
     private Button modificarB;
 
     @FXML
+    private TextField nivelArmaTF;
+
+    @FXML
     private TextField alcanceArma;
 
     @FXML
@@ -53,15 +57,42 @@ public class CrearArma implements Initializable, DragWindow {
     private TextField rangoExplosionArma;
 
 
+
     @FXML
-    void salir(MouseEvent event) throws IOException {
+    public void salir(MouseEvent event) throws IOException {
         comun.cerrar(event, true);
         comun.abrirVentana("FXMLS/principal.fxml");
     }
 
     @FXML
-    void salir2(MouseEvent event) throws IOException {
+    public void salir2(MouseEvent event) throws IOException {
         comun.cerrar(event, true);
+    }
+
+    @FXML
+    public void niveles(ActionEvent event) throws IOException {
+        if (!nivelArmaTF.getText().isEmpty())
+            comun.abrirVentana("FXMLS/escogerNiveles.fxml");
+        else
+            System.out.println("Escribir el nivel");
+    }
+
+    @FXML
+    public void crearArma(){
+        if (!nombreArma.getText().isEmpty()){
+            //set nombre
+            if (!alcanceArma.getText().isEmpty())
+                //set alcance
+                System.out.println();
+            if (!dannoArma.getText().isEmpty())
+                //set daño
+                System.out.println();
+            if (!rangoExplosionArma.getText().isEmpty())
+                //set rango explosion
+                System.out.println();
+        }else {
+            System.out.println("Tiene que tener nombre");
+        }
     }
 
     @Override

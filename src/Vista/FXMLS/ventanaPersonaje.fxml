@@ -107,7 +107,7 @@
             <Font name="Gabriola" size="22.0" />
          </font>
       </Text>
-      <ComboBox blendMode="MULTIPLY" layoutX="268.0" layoutY="385.0" prefHeight="43.0" prefWidth="214.0" />
+      <ComboBox fx:id="armasPersonaje" blendMode="MULTIPLY" layoutX="268.0" layoutY="385.0" prefHeight="43.0" prefWidth="214.0" />
       <ImageView fitHeight="43.0" fitWidth="27.0" layoutX="501.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/mas.png" />
@@ -128,5 +128,10 @@
             <Image url="@../Imagenes/salir.png" />
          </image>
       </ImageView>
+      <TextField fx:id="nivelPersonajeTF" blendMode="MULTIPLY" layoutX="270.0" layoutY="440.0">
+         <font>
+            <Font name="Gabriola" size="22.0" />
+         </font>
+      </TextField>
    </children>
 </Pane>
