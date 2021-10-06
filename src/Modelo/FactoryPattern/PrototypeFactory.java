@@ -7,10 +7,14 @@ import java.util.Set;
 
 public class PrototypeFactory {
 
-    public static HashMap<String, IPrototype> prototipos;
+    public static HashMap<String, IPrototype> prototipos = new HashMap<>();
 
-    public static IPrototype GetItem(String nombrePrototipo){
-        return ((IPrototype)prototipos.get(nombrePrototipo).clone());
+    public static ArrayList<IPrototype> getItem(String nombrePrototipo, int cant){
+        ArrayList<IPrototype> peticiones = new ArrayList<>();
+        for (int i = 0 ; i < cant ; i++){
+            peticiones.add(((IPrototype)prototipos.get(nombrePrototipo).clone()));
+        }
+        return peticiones;
     }
 
     public static void addItem(String nombre, IPrototype item){
@@ -18,7 +22,7 @@ public class PrototypeFactory {
     }
 
     public static ArrayList<IPrototype>getAll(){
-        ArrayList<IPrototype> listaItems = new ArrayList<IPrototype>();
+        ArrayList<IPrototype> listaItems = new ArrayList<>();
 
         Set<String> llaves = prototipos.keySet();
 
@@ -37,6 +41,10 @@ public class PrototypeFactory {
             keys.add(llave);
         }
         return keys;
+    }
+
+    public static HashMap<String, IPrototype> getHash(){
+        return prototipos;
     }
 
 }
