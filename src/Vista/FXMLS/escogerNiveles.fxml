@@ -28,12 +28,12 @@
          <font>
             <Font name="Gabriola" size="25.0" />
          </font></Text>
-      <ComboBox blendMode="MULTIPLY" layoutX="119.0" layoutY="84.0" prefHeight="40.0" prefWidth="195.0" />
+      <ComboBox fx:id="accionesCB" blendMode="MULTIPLY" layoutX="119.0" layoutY="84.0" prefHeight="40.0" prefWidth="195.0" />
       <Text layoutX="14.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva acción">
          <font>
             <Font name="Gabriola" size="25.0" />
          </font></Text>
-      <TextField blendMode="MULTIPLY" layoutX="119.0" layoutY="140.0">
+      <TextField fx:id="accionesTF" blendMode="MULTIPLY" layoutX="119.0" layoutY="140.0">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font></TextField>

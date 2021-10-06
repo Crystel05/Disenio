@@ -6,10 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -30,15 +33,24 @@ public class ControllerNiveles implements Initializable, DragWindow {
     //Aca agrego esta referencia mientras tanto
     ILoadImages viewType;
 
-    public void setPantalla(ILoadImages viewType){
-        this.viewType = viewType;
-    }
+    @FXML
+    private ComboBox<String> accionesCB;
+
+    @FXML
+    private TextField accionesTF;
+
+    @FXML
+    private ImageView foto;
 
     @FXML
     private Pane niveles;
 
     @FXML
-    private ImageView foto;
+    private Text nivelNumero;
+
+    public void setPantalla(ILoadImages viewType){
+        this.viewType = viewType;
+    }
 
     @FXML
     public void cerrar(MouseEvent event) throws IOException {
@@ -88,13 +100,15 @@ public class ControllerNiveles implements Initializable, DragWindow {
             currentImages.remove(currentImages.size()-1);
     }
     //TODO:Desarrollar este metodo para comprobar o que se haya seleccionado una accion o se haya escrito algo en el textField
-    public boolean isActionSelected(){
-        return 1;
+    public void isActionSelected(){
+
     }
 
     //Metodo cuando ya se agregaron todas las imagenes
     public void agregarImagenes(){
-        if(!currentImages.isEmpty() && isActionSelected())
-            viewType.loadImages(labelAccion.getText(),currentImages);
+        String accion = accionesCB.getSelectionModel().getSelectedItem();
+        accionesTF.setText(accion);
+        if(!currentImages.isEmpty() && !accionesTF.getText().isEmpty())
+            viewType.loadImages(accionesTF.getText(),currentImages);
     }
 }

@@ -88,6 +88,7 @@ public class CrearArma implements Initializable, DragWindow {
                 setDano();
             if (!rangoExplosionArma.getText().isEmpty())
                 setRango();
+
             comun.getControlador().buildCurrentArma();
         }else {
             System.out.println("Tiene que tener nombre");
@@ -134,6 +135,6 @@ public class CrearArma implements Initializable, DragWindow {
 
     //Este metodo es usado por el controlador de la pantalla de crear nivel
     public void loadImages(String nombre, ArrayList<String> currentImages){
-        comun.getControlador().addAparienciaArma(Integer.parseInt(nivelAparienciaTF.getText()),nombre,currentImages);
+        comun.getControlador().addAparienciaArma(Integer.parseInt(nivelArmaTF.getText()),nombre,currentImages);
     }
 }
