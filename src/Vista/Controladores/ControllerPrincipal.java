@@ -2,6 +2,7 @@ package Vista.Controladores;
 
 import Controlador.DragWindow;
 import FileManager.ProcesadorSerializable;
+import Modelo.FactoryPattern.PrototypeFactory;
 import Vista.ControllerComun;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -109,6 +110,7 @@ public class ControllerPrincipal implements Initializable, DragWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        PrototypeFactory.initiliazeFactory();
         this.onDraggedScene(principal);
     }
 

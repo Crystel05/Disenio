@@ -1,7 +1,10 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import Modelo.EnumPrototypes;
 import Vista.ControllerComun;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,20 +18,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ControllerNiveles implements Initializable, DragWindow {
+
     private ControllerComun comun = ControllerComun.getInstance();
-    ArrayList<String> currentImages = new ArrayList<>();
+    private ArrayList<String> currentImages = new ArrayList<>();
+    private String pathImagen;
 
     //Aca agrego esta referencia mientras tanto
     ILoadImages viewType;
@@ -69,23 +71,11 @@ public class ControllerNiveles implements Initializable, DragWindow {
             InputStream stream = new FileInputStream(pathFoto);
             Image image = new Image(stream);
             foto.setImage(image);
-            //Aca se agrega a la lista actual.
-            addToCurrentImages(pathFoto);
+            pathImagen = pathFoto;
         }catch (NullPointerException e){
             System.out.println("Sin ruta");
         }
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.onDraggedScene(niveles);
-    }
-
-    @Override
-    public void onDraggedScene(Pane panelFather) {
-        DragWindow.super.onDraggedScene(panelFather);
-    }
-
 
     ////////////////////////////////////////////////////Metodos de Manejo de imagenes//////////////////////////////////////////////////
     //Se tiene este array de imagenes que tiene las imagenes que se han cargado hasta el momento. Cuando se cree el grupo de imagenes por nivel y accion entonces se agrega al builder
@@ -99,16 +89,53 @@ public class ControllerNiveles implements Initializable, DragWindow {
         if(!currentImages.isEmpty())
             currentImages.remove(currentImages.size()-1);
     }
-    //TODO:Desarrollar este metodo para comprobar o que se haya seleccionado una accion o se haya escrito algo en el textField
-    public void isActionSelected(){
-
-    }
 
     //Metodo cuando ya se agregaron todas las imagenes
     public void agregarImagenes(){
-        String accion = accionesCB.getSelectionModel().getSelectedItem();
-        accionesTF.setText(accion);
+        if (accionesTF.getText().isEmpty()) {
+            String accion = accionesCB.getSelectionModel().getSelectedItem();
+            accionesTF.setText(accion);
+        }
         if(!currentImages.isEmpty() && !accionesTF.getText().isEmpty())
             viewType.loadImages(accionesTF.getText(),currentImages);
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ObservableList<String> acciones = FXCollections.observableArrayList();
+        ArrayList<String> accs;
+        try {
+            if(comun.isEsArma())
+                accs = comun.getListaAcciones(EnumPrototypes.ARMAS);
+            else
+                accs = comun.getListaAcciones(EnumPrototypes.PERSONAJES);
+        }catch (NullPointerException e){
+            accs = new ArrayList<>();
+        }
+
+        acciones.addAll(accs);
+        accionesCB.setItems(acciones);
+        this.onDraggedScene(niveles);
+    }
+
+    @FXML
+    public void agregarImagen(ActionEvent event){
+        if (!pathImagen.isEmpty())
+            addToCurrentImages(pathImagen);
+        System.out.println(currentImages.get(0));
+    }
+
+    @FXML
+    public void agregarImagenesNivel(ActionEvent event){
+        if (!currentImages.isEmpty()){
+            agregarImagenes();
+            System.out.println("llego aquí");
+        }
+
+    }
+
+    @Override
+    public void onDraggedScene(Pane panelFather) {
+        DragWindow.super.onDraggedScene(panelFather);
     }
 }

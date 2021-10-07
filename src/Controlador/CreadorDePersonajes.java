@@ -1,12 +1,14 @@
 package Controlador;
 
 import Modelo.Apariencia.LvlImages;
+import Modelo.Apariencia.ManagerApariencia;
 import Modelo.Arma;
 import Modelo.BuilderPattern.IBuilder;
 import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
 import Modelo.PrototypePattern.IPrototype;
+import Modelo.WeaponManager;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,7 @@ public class CreadorDePersonajes {
 
 
     IBuilder currentBuilding;
+
 
 
     ////////////////////////////////////////////////////Metodos de clonacion////////////////////////////////////////////////////
@@ -104,6 +107,7 @@ public class CreadorDePersonajes {
         LvlImages imagenPorAccion = new LvlImages(accion,imagenes);
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
         this.currentBuilding = nowBuilding.addApariencia(nivel,imagenPorAccion);
+        System.out.println("Logico "+imagenes.get(0));
     }
 
 
@@ -156,5 +160,8 @@ public class CreadorDePersonajes {
         return arma;
     }
 
+    public IBuilder getCurrentBuilding(){
+        return this.currentBuilding;
+    }
 
 }

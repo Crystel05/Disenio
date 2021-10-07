@@ -2,6 +2,9 @@ package Vista;
 
 import Controlador.CreadorDePersonajes;
 import Modelo.Apariencia.ManagerApariencia;
+import Modelo.Arma;
+import Modelo.BuilderPattern.IBuilder;
+import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
 import Modelo.PrototypePattern.IPrototype;
@@ -26,6 +29,7 @@ public class ControllerComun {
     private boolean armas;
     private static ControllerComun controllerComun ;
     private String rutaDirectorio = "\\Directorio";
+    private boolean esArma;
 
     public ControllerComun(){}
 
@@ -61,6 +65,15 @@ public class ControllerComun {
         this.rutaDirectorio = rutaDirectorio;
     }
 
+
+    public boolean isEsArma() {
+        return esArma;
+    }
+
+    public void setEsArma(boolean esArma) {
+        this.esArma = esArma;
+    }
+
     public void cerrar(MouseEvent event, Boolean atras){
         Node source = (Node) event.getSource();
         Stage stageActual = (Stage) source.getScene().getWindow();
@@ -86,6 +99,19 @@ public class ControllerComun {
 
     public void agregarControlador(CreadorDePersonajes controladorLogico){
         this.controladorLogico = controladorLogico;
+    }
+
+    public ArrayList<String> getListaAcciones(EnumPrototypes type){
+        switch (type){
+            case ARMAS:
+                Arma arma = (Arma) controladorLogico.getCurrentBuilding();
+                return arma.getApariencia().getAllActions();
+
+            case PERSONAJES:
+                Personaje personaje = (Personaje) controladorLogico.getCurrentBuilding();
+                return personaje.getApariencia().getAllActions();
+        }
+        return null;
     }
 
 

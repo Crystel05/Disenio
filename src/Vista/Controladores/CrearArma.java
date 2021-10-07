@@ -72,8 +72,11 @@ public class CrearArma implements Initializable, DragWindow {
 
     @FXML
     public void niveles(ActionEvent event) throws IOException {
-        if (!nivelArmaTF.getText().isEmpty())
+
+        if (!nivelArmaTF.getText().isEmpty()) {
+            comun.setEsArma(true);
             comun.abrirVentana("FXMLS/escogerNiveles.fxml");
+        }
         else
             System.out.println("Escribir el nivel");
     }
@@ -88,7 +91,6 @@ public class CrearArma implements Initializable, DragWindow {
                 setDano();
             if (!rangoExplosionArma.getText().isEmpty())
                 setRango();
-
             comun.getControlador().buildCurrentArma();
         }else {
             System.out.println("Tiene que tener nombre");

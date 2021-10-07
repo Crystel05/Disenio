@@ -28,12 +28,12 @@
          <font>
             <Font name="Gabriola" size="25.0" />
          </font></Text>
-      <ComboBox blendMode="MULTIPLY" layoutX="119.0" layoutY="84.0" prefHeight="40.0" prefWidth="195.0" />
+      <ComboBox fx:id="accionesCB" blendMode="MULTIPLY" layoutX="119.0" layoutY="84.0" prefHeight="40.0" prefWidth="195.0" />
       <Text layoutX="14.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nueva acción">
          <font>
             <Font name="Gabriola" size="25.0" />
          </font></Text>
-      <TextField blendMode="MULTIPLY" layoutX="119.0" layoutY="140.0">
+      <TextField fx:id="accionesTF" blendMode="MULTIPLY" layoutX="119.0" layoutY="140.0">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font></TextField>
@@ -42,15 +42,15 @@
             <Font name="Bodoni MT Poster Compressed" size="25.0" />
          </font></Button>
       <ImageView fx:id="foto" fitHeight="177.0" fitWidth="246.0" layoutX="344.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
-      <Button blendMode="MULTIPLY" layoutX="241.0" layoutY="350.0" mnemonicParsing="false" text="AGREGAR NIVEL">
+      <Button blendMode="MULTIPLY" layoutX="241.0" layoutY="350.0" mnemonicParsing="false" onAction="#agregarImagenesNivel" text="AGREGAR NIVEL">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="25.0" />
          </font></Button>
-      <Button blendMode="MULTIPLY" layoutX="397.0" layoutY="278.0" mnemonicParsing="false" text="AGREGAR IMAGEN">
+      <Button blendMode="MULTIPLY" layoutX="397.0" layoutY="278.0" mnemonicParsing="false" onAction="#agregarImagen" text="AGREGAR IMAGEN">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="25.0" />
          </font></Button>
-      <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="568.0" layoutY="15.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="46.0" fitWidth="44.0" layoutX="553.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/salir.png" />
          </image>

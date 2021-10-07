@@ -2,6 +2,8 @@ package Vista.Controladores;
 
 import Controlador.DragWindow;
 import Modelo.Arma;
+import Modelo.EnumPrototypes;
+import Modelo.FactoryPattern.PrototypeFactory;
 import Vista.ControllerComun;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,6 +76,7 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
 
     @FXML
     public void agregarNiveles(ActionEvent event) throws IOException {
+        comun.setEsArma(false);
         comun.abrirVentana("FXMLS/escogerNiveles.fxml");
         //TODO:Como pasar el tipo de pantalla al controllerNiveles?
     }
@@ -82,32 +85,6 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     public void cerrar(MouseEvent event) throws IOException {
         comun.cerrar(event, true);
         comun.abrirVentana("FXMLS/principal.fxml");
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        this.onDraggedScene(contenedor);
-        comun.getControlador().addBuilderPersonaje();
-        ObservableList armas = FXCollections.observableArrayList();
-        //TODO: get keys de armas
-        armasPersonaje.setItems(armas);
-        if (comun.isModificado()){
-            nombreTF.setDisable(true);
-            salir2.setVisible(true);
-            salir.setVisible(false);
-            crearLabel.setVisible(false);
-            modificarLabel.setVisible(true);
-            agregarBut.setVisible(false);
-            modificarButt.setVisible(true);
-        }else{
-            nombreTF.setDisable(false);
-            salir2.setVisible(false);
-            salir.setVisible(true);
-            crearLabel.setVisible(true);
-            modificarLabel.setVisible(false);
-            agregarBut.setVisible(true);
-            modificarButt.setVisible(false);
-        }
     }
 
     @FXML
@@ -154,7 +131,8 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     }
 
     //TODO: Cuando viene con una nueva o con una reutilizada
-    public void addArma(Arma arma){
+    public void addArma(String armaNombre){
+        Arma arma = (Arma) PrototypeFactory.getItem(armaNombre, 1, EnumPrototypes.ARMAS).get(0);// cambiar
         comun.getControlador().agregarArmaCurrentPersonaje(arma);
     }
 
@@ -162,5 +140,33 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     public void loadImages(String accion, ArrayList<String> images) {
         comun.getControlador().addAparienciaBuilderPersonaje(Integer.parseInt(nivelAparTF.getText()),accion,images);
     }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.onDraggedScene(contenedor);
+        comun.getControlador().addBuilderPersonaje();
+        ObservableList armas = FXCollections.observableArrayList();
+        PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
+        armasPersonaje.setItems(armas);
+        if (comun.isModificado()){
+            nombreTF.setDisable(true);
+            salir2.setVisible(true);
+            salir.setVisible(false);
+            crearLabel.setVisible(false);
+            modificarLabel.setVisible(true);
+            agregarBut.setVisible(false);
+            modificarButt.setVisible(true);
+        }else{
+            nombreTF.setDisable(false);
+            salir2.setVisible(false);
+            salir.setVisible(true);
+            crearLabel.setVisible(true);
+            modificarLabel.setVisible(false);
+            agregarBut.setVisible(true);
+            modificarButt.setVisible(false);
+        }
+    }
+
+
 
 }

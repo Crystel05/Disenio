@@ -68,6 +68,15 @@ public class ManagerApariencia implements IPrototype<ManagerApariencia> {
         return aparienciasDisponibles;
     }
 
+    public ArrayList<String> getAllActions(){
+        ArrayList<String> listaAcciones = new ArrayList<>();
+        for (LvlImages imagenesPorAccion:aparienciasDisponibles.values()) {
+            for(String accion:imagenesPorAccion.getAparienciasPorNivel().keySet()){
+                listaAcciones.add(accion);
+            }
+        }
+        return listaAcciones;
+    }
 
     @Override
     public String toString() {
