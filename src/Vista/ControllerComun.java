@@ -9,6 +9,8 @@ import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
 import Modelo.PrototypePattern.IPrototype;
 import Modelo.WeaponManager;
+import Vista.Controladores.ControllerNiveles;
+import Vista.Controladores.ILoadImages;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -66,14 +68,6 @@ public class ControllerComun {
     }
 
 
-    public boolean isEsArma() {
-        return esArma;
-    }
-
-    public void setEsArma(boolean esArma) {
-        this.esArma = esArma;
-    }
-
     public void cerrar(MouseEvent event, Boolean atras){
         Node source = (Node) event.getSource();
         Stage stageActual = (Stage) source.getScene().getWindow();
@@ -85,6 +79,18 @@ public class ControllerComun {
     public void abrirVentana(String fxmlName) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));;
         Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void abrirVentana(String fxmlName, ILoadImages type) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));;
+        Parent root = fxmlLoader.load();
+        ControllerNiveles pantallaNivel = fxmlLoader.getController();
+        pantallaNivel.setPantalla(type);
         Stage stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
         stage.setResizable(false);

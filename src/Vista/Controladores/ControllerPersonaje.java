@@ -72,13 +72,14 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     private TextField nivelAparTF;
 
     @FXML
+    private TextField nivelPersonajeTF;
+
+    @FXML
     private ComboBox<String> armasPersonaje;
 
     @FXML
     public void agregarNiveles(ActionEvent event) throws IOException {
-        comun.setEsArma(false);
-        comun.abrirVentana("FXMLS/escogerNiveles.fxml");
-        //TODO:Como pasar el tipo de pantalla al controllerNiveles?
+        comun.abrirVentana("FXMLS/escogerNiveles.fxml",this);
     }
 
     @FXML
@@ -138,7 +139,12 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
 
     @Override
     public void loadImages(String accion, ArrayList<String> images) {
-        comun.getControlador().addAparienciaBuilderPersonaje(Integer.parseInt(nivelAparTF.getText()),accion,images);
+        comun.getControlador().addAparienciaBuilderPersonaje(Integer.parseInt(nivelPersonajeTF.getText()),accion,images);
+    }
+
+    @Override
+    public EnumPrototypes getType() {
+        return EnumPrototypes.PERSONAJES;
     }
 
     @Override

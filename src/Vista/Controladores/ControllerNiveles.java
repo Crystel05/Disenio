@@ -31,9 +31,8 @@ public class ControllerNiveles implements Initializable, DragWindow {
     private ControllerComun comun = ControllerComun.getInstance();
     private ArrayList<String> currentImages = new ArrayList<>();
     private String pathImagen;
-
-    //Aca agrego esta referencia mientras tanto
     ILoadImages viewType;
+
 
     @FXML
     private ComboBox<String> accionesCB;
@@ -105,10 +104,7 @@ public class ControllerNiveles implements Initializable, DragWindow {
         ObservableList<String> acciones = FXCollections.observableArrayList();
         ArrayList<String> accs;
         try {
-            if(comun.isEsArma())
-                accs = comun.getListaAcciones(EnumPrototypes.ARMAS);
-            else
-                accs = comun.getListaAcciones(EnumPrototypes.PERSONAJES);
+            accs = comun.getListaAcciones(viewType.getType());
         }catch (NullPointerException e){
             accs = new ArrayList<>();
         }

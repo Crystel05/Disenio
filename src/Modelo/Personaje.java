@@ -175,7 +175,7 @@ public class Personaje implements IPrototype<Personaje> {
     ///BUILDER
     public static class BuilderPersonaje implements IBuilder<Personaje> {
         private String nombre;
-        private ManagerApariencia apariencia;
+        private ManagerApariencia apariencia = new ManagerApariencia();
         private int vida;
         private int ataque;
         private int nivel;

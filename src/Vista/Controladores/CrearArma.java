@@ -1,6 +1,7 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import Modelo.EnumPrototypes;
 import Vista.ControllerComun;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +19,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class CrearArma implements Initializable, DragWindow {
+public class CrearArma implements Initializable, DragWindow ,ILoadImages{
     private final ControllerComun comun = ControllerComun.getInstance();
 
     @FXML
@@ -74,8 +75,7 @@ public class CrearArma implements Initializable, DragWindow {
     public void niveles(ActionEvent event) throws IOException {
 
         if (!nivelArmaTF.getText().isEmpty()) {
-            comun.setEsArma(true);
-            comun.abrirVentana("FXMLS/escogerNiveles.fxml");
+            comun.abrirVentana("FXMLS/escogerNiveles.fxml",this);
         }
         else
             System.out.println("Escribir el nivel");
@@ -138,5 +138,10 @@ public class CrearArma implements Initializable, DragWindow {
     //Este metodo es usado por el controlador de la pantalla de crear nivel
     public void loadImages(String nombre, ArrayList<String> currentImages){
         comun.getControlador().addAparienciaArma(Integer.parseInt(nivelArmaTF.getText()),nombre,currentImages);
+    }
+
+    @Override
+    public EnumPrototypes getType() {
+        return EnumPrototypes.ARMAS;
     }
 }

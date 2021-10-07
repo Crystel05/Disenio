@@ -42,7 +42,7 @@
             <Font name="Bodoni MT Poster Compressed" size="25.0" />
          </font></Button>
       <ImageView fx:id="foto" fitHeight="177.0" fitWidth="246.0" layoutX="344.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true" />
-      <Button blendMode="MULTIPLY" layoutX="241.0" layoutY="350.0" mnemonicParsing="false" onAction="#agregarImagenesNivel" text="AGREGAR NIVEL">
+      <Button blendMode="MULTIPLY" layoutX="241.0" layoutY="338.0" mnemonicParsing="false" onAction="#agregarImagenesNivel" text="AGREGAR NIVEL">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="25.0" />
          </font></Button>
