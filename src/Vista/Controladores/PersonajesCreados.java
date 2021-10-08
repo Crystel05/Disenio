@@ -94,6 +94,12 @@ public class PersonajesCreados implements Initializable, DragWindow {
 
     @FXML
     public void verDetalles(ActionEvent event) throws FileNotFoundException {
+        nivel = 0;
+        if (listaNivelesPersonajes != null) {
+            listaNivelesPersonajes.clear();
+        }if (listaNivelesArma != null){
+            listaNivelesArma.clear();
+        }
         wait.setVisible(false);
         cargarPrimeravez();
         cargar();
@@ -106,7 +112,8 @@ public class PersonajesCreados implements Initializable, DragWindow {
             String nivels = "Imágenes nivel " + listaNivelesPersonajes.toArray()[nivel];
             imganesPersonaje.setText(nivels);
             cargarImagenesPersonaje();
-        }catch (NullPointerException e){
+        }catch (NullPointerException | ArrayIndexOutOfBoundsException e){
+            nivel = -1;
             System.out.println("No hay más imágemes");
         }
     }
@@ -117,7 +124,9 @@ public class PersonajesCreados implements Initializable, DragWindow {
             nivel ++;
             String nivels = "Imágenes nivel " + listaNivelesArma.toArray()[nivel];
             nivelLabel.setText(nivels);
-        }catch (NullPointerException e){
+            cargarImagenesArma();
+        }catch (NullPointerException | ArrayIndexOutOfBoundsException | FileNotFoundException e){
+            nivel = -1;
             System.out.println("No hay más imágenes para mostrar");
         }
 
@@ -125,23 +134,12 @@ public class PersonajesCreados implements Initializable, DragWindow {
 
     public void cargarPrimeravez(){
         if (!comun.isArmas()) {
-            if (cantClonesTF.getText().isEmpty())
-                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.PERSONAJES);
-            else {
-                int cantClones = Integer.parseInt(cantClonesTF.getText());
-                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.PERSONAJES);
-            }
-
+            personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.PERSONAJES);
             personajeP = (Personaje) personajes.get(0);
             listaNivelesPersonajes = personajeP.getApariencia().getImagenes().keySet();
             listaNivelesArma = personajeP.getArmas().getArmaActual().getApariencia().getImagenes().keySet();
         }else{
-            if (cantidadClonesATF.getText().isEmpty())
-                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.ARMAS);
-            else{
-                int cantClones = Integer.parseInt(cantidadClonesATF.getText());
-                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.ARMAS);
-            }
+            armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.ARMAS);
             armaP = (Arma) armasA.get(0);
             listaNivelesArma = armaP.getApariencia().getImagenes().keySet();
         }
@@ -151,6 +149,10 @@ public class PersonajesCreados implements Initializable, DragWindow {
         if (!comun.isArmas()){
             StringBuilder mostrar = new StringBuilder("PERSONAJE\n");
             int i = 0;
+            if (!cantClonesTF.getText().isEmpty()){
+                int cantClones = Integer.parseInt(cantClonesTF.getText());
+                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.PERSONAJES);
+            }
             for (IPrototype per : personajes){
                 if (personajes.get(0) != per)
                     mostrar.append("\n*****************************************************\nCLON "+ i + "\n");
@@ -163,11 +165,11 @@ public class PersonajesCreados implements Initializable, DragWindow {
                 mostrar.append("\n\tCampos\t\t\t");
                 mostrar.append(personaje.getCampos());
                 mostrar.append("\n\tNivel aparición\t");
-                mostrar.append(personaje.getataque());
+                mostrar.append(personaje.getnivelAparicion());
                 mostrar.append("\n\tVida\t\t\t");
                 mostrar.append(personaje.getVida());
                 mostrar.append("\n\tCosto\t\t\t");
-                mostrar.append(personaje.getataque());
+                mostrar.append(personaje.getCosto());
             }
             cargarImagenesPersonaje();
             clones.setText(String.valueOf(mostrar));
@@ -176,6 +178,11 @@ public class PersonajesCreados implements Initializable, DragWindow {
         }else{
             StringBuilder mostrar = new StringBuilder("ARMA\n");
             int i = 0;
+
+            if (!cantidadClonesATF.getText().isEmpty()) {
+                int cantClones = Integer.parseInt(cantidadClonesATF.getText());
+                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.ARMAS);
+            }
             for (IPrototype arm : armasA){
                 if (armasA.get(0) != arm)
                     mostrar.append("\n*****************************************************\nCLON "+ i + "\n");
@@ -207,7 +214,7 @@ public class PersonajesCreados implements Initializable, DragWindow {
             InputStream arma = new FileInputStream(pathArma);
             Image armaImagen = new Image(arma);
             imagenArma.setImage(armaImagen);
-        }catch (NullPointerException e){
+        }catch (NullPointerException | ArrayIndexOutOfBoundsException e){
             System.out.println("No hay arma");
         }
 
