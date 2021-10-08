@@ -83,7 +83,8 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     public void agregarNiveles(ActionEvent event) throws IOException {
         if (!nivelPersonajeTF.getText().isEmpty()){
             comun.abrirVentana("FXMLS/escogerNiveles.fxml",this);
-        }
+        }else
+            System.out.println("Escriba un nivel");
     }
 
     @FXML
@@ -106,8 +107,7 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
                 setNivel();
             if (!costoTF.getText().isEmpty())
                 setCosto();
-            Personaje personaje = comun.getControlador().buildCurrentPersonaje();
-            System.out.println(personaje.toString());
+            comun.getControlador().buildCurrentPersonaje();
         }else{
             System.out.println("Tiene que tener nombre");
         }
@@ -125,8 +125,7 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
             setNivel();
         if (!costoTF.getText().isEmpty())
             setCosto();
-        Personaje personaje = comun.getControlador().buildCurrentPersonaje();
-        System.out.println(personaje.toString());
+        comun.getControlador().buildCurrentPersonaje();
     }
 
     @Override
@@ -183,11 +182,9 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
         this.onDraggedScene(contenedor);
         ObservableList<String> armas = FXCollections.observableArrayList();
         ArrayList<String> nombres = PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
-        System.out.println(nombres.size());
         armas.addAll(nombres);
         armasPersonaje.setItems(armas);
         if (comun.isModificado()){
-            System.out.println(comun.getNombreElemento());
             comun.getControlador().createFromPersonajeExistente(comun.getNombreElemento());
             nombreTF.setDisable(true);
             salir2.setVisible(true);

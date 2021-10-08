@@ -30,7 +30,7 @@ public class ControllerComun {
     private boolean modificado;
     private boolean armas;
     private static ControllerComun controllerComun ;
-    private String rutaDirectorio = null;
+    private String rutaDirectorio;
     private String nombreElemento;
     private boolean esArma;
 

@@ -57,9 +57,9 @@
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
       <Line endX="300.0" layoutX="367.0" layoutY="159.0" startX="-100.0" stroke="#3187b2" strokeWidth="3.0" />
-      <Pane fx:id="detalles" layoutY="172.0" prefHeight="356.0" prefWidth="933.0" visible="false">
+      <Pane fx:id="detalles" layoutY="172.0" prefHeight="356.0" prefWidth="933.0">
          <children>
-            <Text layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes nivel 1">
+            <Text fx:id="imganesPersonaje" layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes nivel 1">
                <font>
                   <Font name="Gabriola" size="25.0" />
                </font>
@@ -74,7 +74,7 @@
                </font></Text>
             <ImageView fx:id="imagenPersonaje" fitHeight="200.0" fitWidth="253.0" layoutX="392.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="imagenArma" fitHeight="200.0" fitWidth="253.0" layoutX="662.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
-            <Button blendMode="MULTIPLY" layoutX="618.0" layoutY="298.0" mnemonicParsing="false" text="Siguiente">
+            <Button blendMode="MULTIPLY" layoutX="618.0" layoutY="298.0" mnemonicParsing="false" onAction="#siguiente" text="Siguiente">
                <font>
                   <Font name="Bodoni MT Poster Compressed" size="26.0" />
                </font></Button>
@@ -82,7 +82,7 @@
                <font>
                   <Font name="Gabriola" size="20.0" />
                </font></TextArea>
-            <TextField fx:id="cantClonesTF" alignment="TOP_CENTER" blendMode="MULTIPLY" layoutX="86.0" layoutY="303.0" onMouseClicked="#cargarClones" promptText="cantidad clones">
+            <TextField fx:id="cantClonesTF" alignment="TOP_CENTER" blendMode="MULTIPLY" layoutX="86.0" layoutY="303.0" onKeyPressed="#cargarClones" promptText="cantidad clones">
                <font>
                   <Font name="Gabriola" size="21.0" />
                </font></TextField>
@@ -97,15 +97,15 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="armas" layoutY="170.0" prefHeight="356.0" prefWidth="933.0">
+      <Pane fx:id="armas" layoutY="170.0" prefHeight="356.0" prefWidth="933.0" visible="false">
          <children>
-            <Text layoutX="594.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes nivel x" textAlignment="CENTER">
+            <Text fx:id="nivelLabel" layoutX="594.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes nivel x" textAlignment="CENTER">
                <font>
                   <Font name="Gabriola" size="28.0" />
                </font>
             </Text>
             <ImageView fitHeight="222.0" fitWidth="313.0" layoutX="509.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true" />
-            <Button blendMode="MULTIPLY" layoutX="622.0" layoutY="287.0" mnemonicParsing="false" text="Siguiente">
+            <Button fx:id="sigPersonaje" blendMode="MULTIPLY" layoutX="622.0" layoutY="287.0" mnemonicParsing="false" onAction="#siguienteArmas" text="Siguiente">
                <font>
                   <Font name="Bodoni MT Poster Compressed" size="25.0" />
                </font></Button>
@@ -114,7 +114,7 @@
                   <Font name="Gabriola" size="20.0" />
                </font>
             </TextArea>
-            <TextField fx:id="cantidadClonesATF" alignment="CENTER" layoutX="117.0" layoutY="299.0" onMouseClicked="#cargarClones" promptText="cantidad de clones">
+            <TextField fx:id="cantidadClonesATF" alignment="CENTER" layoutX="117.0" layoutY="299.0" onKeyPressed="#cargarClones" promptText="cantidad de clones">
                <font>
                   <Font name="Gabriola" size="22.0" />
                </font>

@@ -95,8 +95,13 @@ public class ControllerNiveles implements Initializable, DragWindow {
             String accion = accionesCB.getSelectionModel().getSelectedItem();
             accionesTF.setText(accion);
         }
-        if(!currentImages.isEmpty() && !accionesTF.getText().isEmpty())
-            viewType.loadImages(accionesTF.getText(),currentImages);
+        try {
+            if(!currentImages.isEmpty() && !accionesTF.getText().isEmpty())
+                viewType.loadImages(accionesTF.getText(),currentImages);
+        }catch (NullPointerException e){
+            System.out.println("No se esocogió una acción");
+        }
+
     }
 
     @Override
@@ -116,9 +121,13 @@ public class ControllerNiveles implements Initializable, DragWindow {
 
     @FXML
     public void agregarImagen(ActionEvent event){
-        if (!pathImagen.isEmpty())
-            addToCurrentImages(pathImagen);
-        System.out.println(currentImages.get(0));
+        try {
+            if (!pathImagen.isEmpty())
+                addToCurrentImages(pathImagen);
+            System.out.println(currentImages.get(0));
+        }catch (NullPointerException e){
+            System.out.println("No se escogió imagen");
+        }
     }
 
     @FXML

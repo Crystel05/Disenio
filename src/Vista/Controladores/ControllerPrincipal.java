@@ -55,7 +55,7 @@ public class ControllerPrincipal implements Initializable, DragWindow {
             comun.setRutaDirectorio(rutaDirectorio.getText());
         }
 
-        if (!comun.getRutaDirectorio().isEmpty()){
+        if (comun.getRutaDirectorio() != null){
             if (armaRB.isSelected() || personajeRB.isSelected()) {
                 Node source = (Node) event.getSource();
                 Stage stageActual = (Stage) source.getScene().getWindow();
@@ -67,48 +67,59 @@ public class ControllerPrincipal implements Initializable, DragWindow {
                     comun.abrirVentana("FXMLS/ventanaPersonaje.fxml");
                 }
             }
+        }else{
+            System.out.println("Escoja una ruta para guardar los elementos que se creen");
         }
-
-//        if (!comun.getRutaDirectorio().isEmpty()) {
-//            if (!rutaDirectorio.getText().isEmpty()) {
-//                comun.setRutaDirectorio(rutaDirectorio.getText());
-
-//            }
-//        }
     }
 
     @FXML
     public void verPersonajes(ActionEvent event) throws IOException {
-        Node source = (Node) event.getSource();
-        Stage stageActual = (Stage) source.getScene().getWindow();
-        stageActual.close();
-        comun.setArmas(false);
-        comun.abrirVentana("FXMLS/PersonajesCreados.fxml");
+        if (comun.getRutaDirectorio() != null) {
+            Node source = (Node) event.getSource();
+            Stage stageActual = (Stage) source.getScene().getWindow();
+            stageActual.close();
+            comun.setArmas(false);
+            comun.abrirVentana("FXMLS/PersonajesCreados.fxml");
+        }else
+            System.out.println("No se cargó ningún archivo");
 
     }
 
     @FXML
     public void verArmas(ActionEvent event) throws IOException {
-        Node source = (Node) event.getSource();
-        Stage stageActual = (Stage) source.getScene().getWindow();
-        stageActual.close();
-        comun.setArmas(true);
-        comun.abrirVentana("FXMLS/PersonajesCreados.fxml");
+        if (comun.getRutaDirectorio() != null) {
+            Node source = (Node) event.getSource();
+            Stage stageActual = (Stage) source.getScene().getWindow();
+            stageActual.close();
+            comun.setArmas(true);
+            comun.abrirVentana("FXMLS/PersonajesCreados.fxml");
+        }else
+            System.out.println("No se cargó ningún archivo");
     }
 
     @FXML
     public void cargarRuta(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Escoger ruta");
-        Node source = (Node) event.getSource();
-        Stage stageActual = (Stage) source.getScene().getWindow();
-        File file = fileChooser.showOpenDialog(stageActual);
-        comun.setRutaDirectorio(file.getAbsolutePath());
+        try {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Escoger ruta");
+            Node source = (Node) event.getSource();
+            Stage stageActual = (Stage) source.getScene().getWindow();
+            File file = fileChooser.showOpenDialog(stageActual);
+            comun.setRutaDirectorio(file.getAbsolutePath());
+            rutaDirectorio.setText(file.getAbsolutePath());
+            System.out.println(file.getCanonicalPath());
+        }catch (NullPointerException | IOException e){
+            System.out.println("Sin archivo cargado");
+        }
     }
 
     @FXML
     public void guardarPersonajes(ActionEvent event){
-        ProcesadorSerializable.fileWriter(PrototypeFactory.getPrototipos(), comun.getRutaDirectorio());
+        try {
+            ProcesadorSerializable.fileWriter(PrototypeFactory.getPrototipos(), comun.getRutaDirectorio());
+        }catch (NullPointerException e) {
+            System.out.println("No hay nada que guardar");
+        }
     }
 
     @FXML
@@ -118,7 +129,9 @@ public class ControllerPrincipal implements Initializable, DragWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        if (comun.getRutaDirectorio() != null){
+            rutaDirectorio.setText(comun.getRutaDirectorio());
+        }
         this.onDraggedScene(principal);
     }
 

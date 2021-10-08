@@ -110,14 +110,14 @@ public class CrearArma implements Initializable, DragWindow ,ILoadImages{
             setDano();
         if (!rangoExplosionArma.getText().isEmpty())
             setRango();
-        Arma arma = comun.getControlador().buildCurrentArma();
+        comun.getControlador().buildCurrentArma();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         this.onDraggedScene(arma);
         if (comun.isArmas()){
+            nombreArma.setDisable(true);
             comun.getControlador().createFromArmaExistente(comun.getNombreElemento());
             crearL.setVisible(false);
             modificarL.setVisible(true);
