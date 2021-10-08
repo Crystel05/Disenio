@@ -1,9 +1,11 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import FileManager.ProcesadorSerializable;
 import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
+import Modelo.PrototypePattern.IPrototype;
 import Vista.ControllerComun;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +13,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -28,34 +32,75 @@ public class PersonajesCreados implements Initializable, DragWindow {
     private Text armasL;
 
     @FXML
-    private Text creadosL;
-
-    @FXML
-    private Pane contenedor;
+    private Pane wait;
 
     @FXML
     private Pane armas;
 
     @FXML
-    private Pane wait;
+    private Pane contenedor;
+
+    @FXML
+    private ComboBox<String> nombresPersonajes;
+
+    @FXML
+    private Text creadosL;
 
     @FXML
     private Pane detalles;
 
     @FXML
-    private ComboBox<String> nombresPersonajes;
+    private TextArea clones;
+
+    @FXML
+    private TextField cantClonesTF;
 
 
     @FXML
     public void verDetalles(ActionEvent event){
         wait.setVisible(false);
+        cargar();
+    }
+
+    public void cargar(){
         if (!comun.isArmas()) {
+            ArrayList<IPrototype> personajes;
+            if (cantClonesTF.getText().isEmpty())
+                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.PERSONAJES);
+            else{
+                int cantClones = Integer.parseInt(cantClonesTF.getText());
+                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.PERSONAJES);
+            }
+            StringBuilder mostrar = new StringBuilder("PERSONAJE\n");
+            for (IPrototype per : personajes){
+                if (personajes.get(0) != per)
+                    mostrar.append("\n*****************************************************\nCLON\n");
+                Personaje personaje = (Personaje) per;
+                mostrar.append("\tNombre\t\t\t");
+                mostrar = mostrar.append(personaje.getNombre());
+                mostrar.append("\n\tAtaque\t\t\t");
+                mostrar.append(personaje.getataque());
+                mostrar.append("\n\tCampos\t\t\t");
+                mostrar.append(personaje.getCampos());
+                mostrar.append("\n\tNivel aparición\t\t\t");
+                mostrar.append(personaje.getataque());
+                mostrar.append("\n\tVida\t\t\t");
+                mostrar.append(personaje.getVida());
+                mostrar.append("\n\tCosto\t\t\t");
+                mostrar.append(personaje.getataque());
+            }
+            clones.setText(String.valueOf(mostrar));
             detalles.setVisible(true);
             armas.setVisible(false);
         }else{
             detalles.setVisible(false);
             armas.setVisible(true);
         }
+    }
+
+    @FXML
+    public void cargarClones(MouseEvent event){
+        cargar();
     }
 
     @FXML
@@ -95,21 +140,25 @@ public class PersonajesCreados implements Initializable, DragWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (!comun.getRutaDirectorio().isEmpty()) {
+            PrototypeFactory.setPrototipos(ProcesadorSerializable.fileReader(comun.getRutaDirectorio()));
+        }
         detalles.setVisible(false);
         wait.setVisible(true);
         armas.setVisible(false);
         this.onDraggedScene(contenedor);
-        if (comun.isArmas()) {
-            armasL.setVisible(true);
-            creadosL.setVisible(false);
-        }else{
-            armasL.setVisible(false);
-            creadosL.setVisible(true);
-        }
-
         try {
             ObservableList<String> personajes = FXCollections.observableArrayList();
-            ArrayList<String> nombres = PrototypeFactory.getAllKeys(EnumPrototypes.PERSONAJES);
+            ArrayList<String> nombres;
+            if (comun.isArmas()) {
+                nombres = PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
+                armasL.setVisible(true);
+                creadosL.setVisible(false);
+            }else{
+                nombres = PrototypeFactory.getAllKeys(EnumPrototypes.PERSONAJES);
+                armasL.setVisible(false);
+                creadosL.setVisible(true);
+            }
             personajes.addAll(nombres);
             nombresPersonajes.setItems(personajes);
         }

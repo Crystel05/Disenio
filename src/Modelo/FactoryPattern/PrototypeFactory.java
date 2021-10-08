@@ -10,10 +10,18 @@ public class PrototypeFactory {
 
     public static HashMap<EnumPrototypes, HashMap<String, IPrototype>> prototipos = new HashMap<>();
 
+    public static void setPrototipos(HashMap<EnumPrototypes, HashMap<String, IPrototype>> proto){
+        prototipos = proto;
+    }
+
     public static void initiliazeFactory() {
         for(EnumPrototypes element : EnumPrototypes.values()){
             prototipos.put(element, new HashMap<>());
         }
+    }
+
+    public static HashMap<EnumPrototypes, HashMap<String, IPrototype>> getPrototipos() {
+        return prototipos;
     }
 
     public static ArrayList<IPrototype> getItem(String nombrePrototipo, int cant, EnumPrototypes tipoHash) {
@@ -23,6 +31,7 @@ public class PrototypeFactory {
         }
         return peticiones;
     }
+
 
     public static void addItem(String nombre, IPrototype item, EnumPrototypes tipoHash){
         prototipos.get(tipoHash).put(nombre,item);

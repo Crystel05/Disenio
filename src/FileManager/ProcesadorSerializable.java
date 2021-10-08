@@ -1,5 +1,6 @@
 package FileManager;
 
+import Modelo.EnumPrototypes;
 import Modelo.PrototypePattern.IPrototype;
 
 import java.io.*;
@@ -10,7 +11,7 @@ public class ProcesadorSerializable {
 
     public ProcesadorSerializable() {}
 
-    public static void fileWriter(HashMap<String, IPrototype> prototipos, String path) {
+    public static void fileWriter(HashMap<EnumPrototypes, HashMap<String, IPrototype>> prototipos, String path) {
 
         try {
             FileOutputStream fileOut = new FileOutputStream(path);
@@ -30,11 +31,11 @@ public class ProcesadorSerializable {
 
     public static HashMap fileReader(String path) {
 
-        HashMap<String, IPrototype> prototipos = new HashMap<>();
+        HashMap<EnumPrototypes, HashMap<String, IPrototype>> prototipos = new HashMap<>();
         try {
             FileInputStream fileIn = new FileInputStream(path);
             ObjectInputStream in = new ObjectInputStream(fileIn);
-            prototipos = (HashMap<String, IPrototype>) in.readObject();
+            prototipos = (HashMap<EnumPrototypes, HashMap<String, IPrototype>>) in.readObject();
             in.close();
             fileIn.close();
             System.out.println("Loaded DataBase successfully from: " + path);

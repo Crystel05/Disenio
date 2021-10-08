@@ -38,7 +38,7 @@
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></RadioButton>
-      <RadioButton fx:id="armaRB" blendMode="MULTIPLY" layoutX="191.0" layoutY="154.0" mnemonicParsing="false" onAction="#armaSelected" text="Arma">
+      <RadioButton fx:id="armaRB" blendMode="MULTIPLY" layoutX="184.0" layoutY="154.0" mnemonicParsing="false" onAction="#armaSelected" text="Arma">
          <font>
             <Font name="Gabriola" size="22.0" />
          </font></RadioButton>
@@ -56,11 +56,11 @@
             <Font name="Gabriola" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="crearB1" blendMode="MULTIPLY" layoutX="372.0" layoutY="106.0" mnemonicParsing="false" onAction="#verPersonajes" text="VER PERSONAJES CREADOS">
+      <Button fx:id="crearB1" blendMode="MULTIPLY" layoutX="371.0" layoutY="111.0" mnemonicParsing="false" onAction="#verPersonajes" text="VER PERSONAJES CREADOS">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
-      <Button fx:id="crearB11" blendMode="MULTIPLY" layoutX="390.0" layoutY="194.0" mnemonicParsing="false" onAction="#verArmas" text="VER ARMAS CREADAS">
+      <Button fx:id="crearB11" blendMode="MULTIPLY" layoutX="390.0" layoutY="183.0" mnemonicParsing="false" onAction="#verArmas" text="VER ARMAS CREADAS">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
@@ -69,12 +69,17 @@
             <Font name="Gabriola" size="30.0" />
          </font>
       </Text>
-      <Line endX="90.0" layoutX="321.0" layoutY="154.0" rotate="90.0" startX="-100.0" strokeWidth="3.0" />
-      <TextField fx:id="rutaDirectorio" blendMode="MULTIPLY" layoutX="61.0" layoutY="104.0" promptText="guardar en...">
+      <Line endX="90.0" layoutX="324.0" layoutY="168.0" rotate="90.0" startX="-100.0" strokeWidth="3.0" />
+      <TextField fx:id="rutaDirectorio" blendMode="MULTIPLY" layoutX="61.0" layoutY="111.0" promptText="guardar en...">
          <font>
             <Font name="Gabriola" size="20.0" />
          </font></TextField>
-      <Button fx:id="crearB111" blendMode="MULTIPLY" layoutX="242.0" layoutY="259.0" mnemonicParsing="false" onAction="#cargarRuta" text="CARGAR ARCHIVO">
+      <Button fx:id="crearB111" blendMode="MULTIPLY" layoutX="402.0" layoutY="251.0" mnemonicParsing="false" onAction="#cargarRuta" text="CARGAR ARCHIVO">
+         <font>
+            <Font name="Bodoni MT Poster Compressed" size="26.0" />
+         </font>
+      </Button>
+      <Button fx:id="crearB2" blendMode="MULTIPLY" layoutX="67.0" layoutY="251.0" mnemonicParsing="false" onAction="#guardarPersonajes" prefHeight="49.0" prefWidth="182.0" text="GUARDAR ELEMENTOS">
          <font>
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font>

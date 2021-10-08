@@ -2,6 +2,7 @@ package Vista.Controladores;
 
 import Controlador.DragWindow;
 import FileManager.ProcesadorSerializable;
+import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Vista.ControllerComun;
 import javafx.event.ActionEvent;
@@ -82,6 +83,7 @@ public class ControllerPrincipal implements Initializable, DragWindow {
         stageActual.close();
         comun.setArmas(false);
         comun.abrirVentana("FXMLS/PersonajesCreados.fxml");
+
     }
 
     @FXML
@@ -101,6 +103,11 @@ public class ControllerPrincipal implements Initializable, DragWindow {
         Stage stageActual = (Stage) source.getScene().getWindow();
         File file = fileChooser.showOpenDialog(stageActual);
         comun.setRutaDirectorio(file.getAbsolutePath());
+    }
+
+    @FXML
+    public void guardarPersonajes(ActionEvent event){
+        ProcesadorSerializable.fileWriter(PrototypeFactory.getPrototipos(), comun.getRutaDirectorio());
     }
 
     @FXML
