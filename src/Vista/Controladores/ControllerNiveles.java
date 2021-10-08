@@ -101,7 +101,6 @@ public class ControllerNiveles implements Initializable, DragWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        comun.getControlador().addBuilderArma();
         ObservableList<String> acciones = FXCollections.observableArrayList();
         ArrayList<String> accs;
         try {

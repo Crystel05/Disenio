@@ -93,4 +93,6 @@ public class WeaponManager implements IPrototype<WeaponManager> {
 
         return new WeaponManager(copiaArmas);
     }
+    
+    public Strin
 }

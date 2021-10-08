@@ -110,7 +110,7 @@ public class ControllerPrincipal implements Initializable, DragWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        PrototypeFactory.initiliazeFactory();
+
         this.onDraggedScene(principal);
     }
 

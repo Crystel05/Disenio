@@ -75,7 +75,7 @@ public class CreadorDePersonajes {
 
     public void setNivelCurrentPersonaje(int nivel){
         Personaje.BuilderPersonaje nowBuilding = (Personaje.BuilderPersonaje) currentBuilding;
-        this.currentBuilding = nowBuilding.setNivel(nivel);
+        this.currentBuilding = nowBuilding.setnivelAparicion(nivel);
     }
 
     public void setCamposCurrentPersonaje(int campos){
@@ -155,7 +155,7 @@ public class CreadorDePersonajes {
     }
 
     public Arma buildCurrentArma(){
-        Arma arma = (Arma)this.currentBuilding;
+        Arma arma = (Arma)this.currentBuilding.build();
         PrototypeFactory.addItem(arma.getNombre(),arma, EnumPrototypes.ARMAS);
         return arma;
     }

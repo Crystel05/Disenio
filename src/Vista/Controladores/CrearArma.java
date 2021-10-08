@@ -1,7 +1,9 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import Modelo.Arma;
 import Modelo.EnumPrototypes;
+import Modelo.FactoryPattern.PrototypeFactory;
 import Vista.ControllerComun;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -91,7 +93,10 @@ public class CrearArma implements Initializable, DragWindow ,ILoadImages{
                 setDano();
             if (!rangoExplosionArma.getText().isEmpty())
                 setRango();
-            comun.getControlador().buildCurrentArma();
+            Arma arma = comun.getControlador().buildCurrentArma();
+            System.out.println(arma.toString());
+            ArrayList<String> armas = PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
+            System.out.println(armas.size());
         }else {
             System.out.println("Tiene que tener nombre");
         }
@@ -99,6 +104,7 @@ public class CrearArma implements Initializable, DragWindow ,ILoadImages{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        comun.getControlador().addBuilderArma();
         this.onDraggedScene(arma);
         if (comun.isArmas()){
             crearL.setVisible(false);

@@ -104,9 +104,8 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
                 setNivel();
             if (!costoTF.getText().isEmpty())
                 setCosto();
-
             Personaje personaje = comun.getControlador().buildCurrentPersonaje();
-            personaje.toString();
+            System.out.println(personaje.toString());
         }else{
             System.out.println("Tiene que tener nombre");
         }
@@ -141,7 +140,7 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     }
 
     @FXML
-    public void agregarArma(ActionEvent event){
+    public void agregarArma(MouseEvent event){
         if (!armasPersonaje.getSelectionModel().getSelectedItem().isEmpty())
             addArma(armasPersonaje.getSelectionModel().getSelectedItem());
     }
@@ -162,6 +161,7 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
         comun.getControlador().addBuilderPersonaje();
         ObservableList<String> armas = FXCollections.observableArrayList();
         ArrayList<String> nombres = PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
+        System.out.println(nombres.size());
         armas.addAll(nombres);
         armasPersonaje.setItems(armas);
         if (comun.isModificado()){

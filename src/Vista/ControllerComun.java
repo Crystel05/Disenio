@@ -77,7 +77,7 @@ public class ControllerComun {
     }
 
     public void abrirVentana(String fxmlName) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));;
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlName));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.initStyle(StageStyle.TRANSPARENT);
