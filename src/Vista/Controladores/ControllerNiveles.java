@@ -101,6 +101,7 @@ public class ControllerNiveles implements Initializable, DragWindow {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        comun.getControlador().addBuilderArma();
         ObservableList<String> acciones = FXCollections.observableArrayList();
         ArrayList<String> accs;
         try {
@@ -126,6 +127,9 @@ public class ControllerNiveles implements Initializable, DragWindow {
         if (!currentImages.isEmpty()){
             agregarImagenes();
             System.out.println("llego aquí");
+            Node source = (Node) event.getSource();
+            Stage stageActual = (Stage) source.getScene().getWindow();
+            stageActual.close();
         }
 
     }

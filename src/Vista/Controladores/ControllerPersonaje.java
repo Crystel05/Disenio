@@ -4,6 +4,7 @@ import Controlador.DragWindow;
 import Modelo.Arma;
 import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
+import Modelo.Personaje;
 import Vista.ControllerComun;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -79,7 +80,8 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
 
     @FXML
     public void agregarNiveles(ActionEvent event) throws IOException {
-        comun.abrirVentana("FXMLS/escogerNiveles.fxml",this);
+        if (!nivelPersonajeTF.getText().isEmpty())
+            comun.abrirVentana("FXMLS/escogerNiveles.fxml",this);
     }
 
     @FXML
@@ -102,7 +104,9 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
                 setNivel();
             if (!costoTF.getText().isEmpty())
                 setCosto();
-            comun.getControlador().buildCurrentPersonaje();
+
+            Personaje personaje = comun.getControlador().buildCurrentPersonaje();
+            personaje.toString();
         }else{
             System.out.println("Tiene que tener nombre");
         }
@@ -131,10 +135,15 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
         comun.getControlador().setCamposCostoPersonaje(Float.parseFloat(costoTF.getText()));
     }
 
-    //TODO: Cuando viene con una nueva o con una reutilizada
     public void addArma(String armaNombre){
         Arma arma = (Arma) PrototypeFactory.getItem(armaNombre, 1, EnumPrototypes.ARMAS).get(0);// cambiar
         comun.getControlador().agregarArmaCurrentPersonaje(arma);
+    }
+
+    @FXML
+    public void agregarArma(ActionEvent event){
+        if (!armasPersonaje.getSelectionModel().getSelectedItem().isEmpty())
+            addArma(armasPersonaje.getSelectionModel().getSelectedItem());
     }
 
     @Override
@@ -151,8 +160,9 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     public void initialize(URL location, ResourceBundle resources) {
         this.onDraggedScene(contenedor);
         comun.getControlador().addBuilderPersonaje();
-        ObservableList armas = FXCollections.observableArrayList();
-        PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
+        ObservableList<String> armas = FXCollections.observableArrayList();
+        ArrayList<String> nombres = PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
+        armas.addAll(nombres);
         armasPersonaje.setItems(armas);
         if (comun.isModificado()){
             nombreTF.setDisable(true);
@@ -172,7 +182,4 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
             modificarButt.setVisible(false);
         }
     }
-
-
-
 }

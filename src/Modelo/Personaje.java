@@ -171,7 +171,6 @@ public class Personaje implements IPrototype<Personaje> {
         }
     }
 
-
     ///BUILDER
     public static class BuilderPersonaje implements IBuilder<Personaje> {
         private String nombre;

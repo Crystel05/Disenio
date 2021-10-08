@@ -36,7 +36,7 @@ public class Arma implements IPrototype<Arma> {
         int nivel;
         int rangoExplosion;
         int municion;
-        ManagerApariencia apariencia;
+        ManagerApariencia apariencia = new ManagerApariencia();
 
         public BuilderArma(){
 

@@ -108,7 +108,7 @@
          </font>
       </Text>
       <ComboBox fx:id="armasPersonaje" blendMode="MULTIPLY" layoutX="268.0" layoutY="385.0" prefHeight="43.0" prefWidth="214.0" />
-      <ImageView fitHeight="43.0" fitWidth="27.0" layoutX="501.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="43.0" fitWidth="27.0" layoutX="501.0" layoutY="395.0" onMouseClicked="#agregarArma" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Imagenes/mas.png" />
          </image>
