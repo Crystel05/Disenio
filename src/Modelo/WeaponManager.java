@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class WeaponManager implements IPrototype<WeaponManager> {
 
+    private static final long serialVersionUID = 2193847894019885555L;
+
     private HashMap<String, Arma> armas;
     private Arma armaActual;
     //Hash de armas

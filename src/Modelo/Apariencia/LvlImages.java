@@ -11,6 +11,8 @@ import java.util.Map;
 //Otro ejemplo es el "Caminando" con su respectico ArrayList de URls caminando
 public class LvlImages implements IPrototype<LvlImages> {
 
+    private static final long serialVersionUID = -5460219658652083079L;
+
     HashMap<String,ArrayList<String>> aparienciasPorNivel;
 
     public LvlImages(){

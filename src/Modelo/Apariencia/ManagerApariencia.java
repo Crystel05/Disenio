@@ -8,6 +8,8 @@ import java.util.Map;
 
 public class ManagerApariencia implements IPrototype<ManagerApariencia> {
 
+    private static final long serialVersionUID = 6642325130412386279L;
+
     HashMap<Integer,LvlImages>  aparienciasDisponibles;
 
     public ManagerApariencia(){

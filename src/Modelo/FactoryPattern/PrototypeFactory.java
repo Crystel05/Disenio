@@ -8,6 +8,8 @@ import java.util.Set;
 
 public class PrototypeFactory {
 
+
+
     public static HashMap<EnumPrototypes, HashMap<String, IPrototype>> prototipos = new HashMap<>();
 
     public static void setPrototipos(HashMap<EnumPrototypes, HashMap<String, IPrototype>> proto){
@@ -27,7 +29,7 @@ public class PrototypeFactory {
     public static ArrayList<IPrototype> getItem(String nombrePrototipo, int cant, EnumPrototypes tipoHash) {
         ArrayList<IPrototype> peticiones = new ArrayList<>();
         for (int i = 0; i < cant; i++) {
-            peticiones.add(((IPrototype) prototipos.get(tipoHash).get(nombrePrototipo).clone()));
+            peticiones.add(((IPrototype) prototipos.get(tipoHash).get(nombrePrototipo).deepClone()));
         }
         return peticiones;
     }
@@ -43,7 +45,7 @@ public class PrototypeFactory {
         Set<EnumPrototypes> llaves = prototipos.keySet();
 
         for(EnumPrototypes llave : llaves) {
-            listaItems.add(((IPrototype)prototipos.get(tipoHash).get(llave).clone()));
+            listaItems.add(((IPrototype)prototipos.get(tipoHash).get(llave).deepClone()));
         }
         return listaItems;
     }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Arma implements IPrototype<Arma> {
 
+    private static final long serialVersionUID = 3L;
+
     String nombre;
     int alcance;
     int dano;

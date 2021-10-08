@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class Personaje implements IPrototype<Personaje> {
 
+    private static final long serialVersionUID = 2439140702371300606L;
+
     private String nombre;
     private ManagerApariencia apariencia;
     private int vida;

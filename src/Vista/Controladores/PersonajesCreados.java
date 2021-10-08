@@ -110,11 +110,12 @@ public class PersonajesCreados implements Initializable, DragWindow {
                 mostrar.append(personaje.getataque());
             }
 
-            //System.out.println(personajeP.getApariencia().getImagenes/*);/*///*;
-           /* InputStream stream = new FileInputStream(path);
+            System.out.println("TEST"+personajeP.getApariencia());
+            String path = personajeP.getApariencia().getImagenes().get(1).getDefault().get(0);
+            InputStream stream = new FileInputStream(path);
             Image image = new Image(stream);
             imagenPersonaje.setImage(image);
-*/
+
             clones.setText(String.valueOf(mostrar));
             detalles.setVisible(true);
             armas.setVisible(false);
@@ -196,7 +197,6 @@ public class PersonajesCreados implements Initializable, DragWindow {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!comun.getRutaDirectorio().isEmpty()) {
-            PrototypeFactory.setPrototipos(ProcesadorSerializable.fileReader(comun.getRutaDirectorio()));
             PrototypeFactory.setPrototipos(ProcesadorSerializable.fileReader(comun.getRutaDirectorio()));
         }
         detalles.setVisible(false);

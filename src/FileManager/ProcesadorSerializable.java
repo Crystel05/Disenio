@@ -37,6 +37,7 @@ public class ProcesadorSerializable {
             FileInputStream fileIn = new FileInputStream(path);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             prototipos = (HashMap<EnumPrototypes, HashMap<String, IPrototype>>) in.readObject();
+            System.out.println(prototipos);
             in.close();
             fileIn.close();
             System.out.println("Loaded DataBase successfully from: " + path);
