@@ -25,7 +25,12 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ControllerComun {
-
+    /**
+     *
+     *
+     *
+     *
+     */
     private CreadorDePersonajes controladorLogico;
     private boolean modificado;
     private boolean armas;
