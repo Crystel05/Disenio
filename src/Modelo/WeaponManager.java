@@ -94,5 +94,11 @@ public class WeaponManager implements IPrototype<WeaponManager> {
         return new WeaponManager(copiaArmas);
     }
     
-    public Strin
+    public String toString(){
+        String string = "";
+        for (Arma arma:armas.values()) {
+            string += arma.toString();
+        }
+        return string;
+    }
 }

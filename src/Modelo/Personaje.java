@@ -280,16 +280,15 @@ public class Personaje implements IPrototype<Personaje> {
 
     @Override
     public String toString() {
-        return "Personaje{" +
-                "nombre='" + nombre + '\'' +
-                ", apariencia=" + apariencia +
-                ", vida=" + vida +
-                ", ataque=" + ataque +
-                ", nivel=" + nivel +
-                ", campos=" + campos +
-                ", nivelAparicion=" + nivelAparicion +
-                ", costo=" + costo +
-                '}';
+        return "Personaje:" +
+                "Nombre:'" + nombre  + '\n' +
+                ", Apariencia:" + apariencia + '\n' +
+                ", Vida:" + vida + '\n' +
+                ", Ataque:" + ataque + '\n' +
+                ", Nivel:" + nivel + '\n' +
+                ", Campos:" + campos + '\n' +
+                ", NivelAparicion:" + nivelAparicion + '\n' +
+                ", Costo:" + costo;
     }
 
     public BuilderPersonaje getBuildable(){

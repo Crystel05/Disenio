@@ -80,8 +80,7 @@ public class ManagerApariencia implements IPrototype<ManagerApariencia> {
 
     @Override
     public String toString() {
-        return "ManagerApariencia{" +
-                "aparienciasDisponibles=" + aparienciasDisponibles +
-                '}';
+        return "ManagerApariencia" +
+                "aparienciasDisponibles=" + aparienciasDisponibles;
     }
 }

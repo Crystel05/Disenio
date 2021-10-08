@@ -165,4 +165,14 @@ public class Arma implements IPrototype<Arma> {
     public BuilderArma getBuildable(){
         return new BuilderArma(this);
     }
+
+    public String toString(){
+        String string = "Arma: "+ nombre + "\n"+
+                        "Alcance: "+ String.valueOf(alcance) + "\n"+
+                        "Daño: "+ String.valueOf(dano) + "\n"+
+                        "Nivel: "+ String.valueOf(nivel) + "\n"+
+                        "RangoExplosion: "+ String.valueOf(nivel) + "\n"+
+                        apariencia.toString();
+        return  string;
+    }
 }
