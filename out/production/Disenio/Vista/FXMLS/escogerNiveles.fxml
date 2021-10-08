@@ -19,7 +19,7 @@
             <GaussianBlur radius="9.23" />
          </effect>
       </ImageView>
-      <Text fx:id="nivelNumero" layoutX="271.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel x">
+      <Text fx:id="nivelNumero" layoutX="282.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nivel">
          <font>
             <Font name="Harrington" size="29.0" />
          </font>

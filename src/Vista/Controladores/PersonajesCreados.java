@@ -2,6 +2,7 @@ package Vista.Controladores;
 
 import Controlador.DragWindow;
 import FileManager.ProcesadorSerializable;
+import Modelo.Arma;
 import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
@@ -15,11 +16,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -53,16 +59,27 @@ public class PersonajesCreados implements Initializable, DragWindow {
     private TextArea clones;
 
     @FXML
-    private TextField cantClonesTF;
-
+    private TextArea datosArmas;
 
     @FXML
-    public void verDetalles(ActionEvent event){
+    private TextField cantClonesTF;
+
+    @FXML
+    private TextField cantidadClonesATF;
+
+    @FXML
+    private ImageView imagenPersonaje;
+
+    @FXML
+    private ImageView imagenArma;
+
+    @FXML
+    public void verDetalles(ActionEvent event) throws FileNotFoundException {
         wait.setVisible(false);
         cargar();
     }
 
-    public void cargar(){
+    public void cargar() throws FileNotFoundException {
         if (!comun.isArmas()) {
             ArrayList<IPrototype> personajes;
             if (cantClonesTF.getText().isEmpty())
@@ -72,9 +89,12 @@ public class PersonajesCreados implements Initializable, DragWindow {
                 personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.PERSONAJES);
             }
             StringBuilder mostrar = new StringBuilder("PERSONAJE\n");
+            Personaje personajeP =(Personaje) personajes.get(0);
+            int i = 0;
             for (IPrototype per : personajes){
                 if (personajes.get(0) != per)
-                    mostrar.append("\n*****************************************************\nCLON\n");
+                    mostrar.append("\n*****************************************************\nCLON "+ i + "\n");
+                i++;
                 Personaje personaje = (Personaje) per;
                 mostrar.append("\tNombre\t\t\t");
                 mostrar = mostrar.append(personaje.getNombre());
@@ -82,24 +102,56 @@ public class PersonajesCreados implements Initializable, DragWindow {
                 mostrar.append(personaje.getataque());
                 mostrar.append("\n\tCampos\t\t\t");
                 mostrar.append(personaje.getCampos());
-                mostrar.append("\n\tNivel aparición\t\t\t");
+                mostrar.append("\n\tNivel aparición\t");
                 mostrar.append(personaje.getataque());
                 mostrar.append("\n\tVida\t\t\t");
                 mostrar.append(personaje.getVida());
                 mostrar.append("\n\tCosto\t\t\t");
                 mostrar.append(personaje.getataque());
             }
+
+            //System.out.println(personajeP.getApariencia().getImagenes/*);/*///*;
+           /* InputStream stream = new FileInputStream(path);
+            Image image = new Image(stream);
+            imagenPersonaje.setImage(image);
+*/
             clones.setText(String.valueOf(mostrar));
             detalles.setVisible(true);
             armas.setVisible(false);
         }else{
+            ArrayList<IPrototype> armasA;
+            if (cantidadClonesATF.getText().isEmpty())
+                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.ARMAS);
+            else{
+                int cantClones = Integer.parseInt(cantidadClonesATF.getText());
+                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.ARMAS);
+            }
+            System.out.println(armasA.size());
+            StringBuilder mostrar = new StringBuilder("ARMA\n");
+            Arma armaP = (Arma) armasA.get(0);
+            int i = 0;
+            for (IPrototype arm : armasA){
+                if (armasA.get(0) != arm)
+                    mostrar.append("\n*****************************************************\nCLON "+ i + "\n");
+                i++;
+                Arma arm1 = (Arma) arm;
+                mostrar.append("\tNombre\t\t\t\t");
+                mostrar = mostrar.append(arm1.getNombre());
+                mostrar.append("\n\tDaño\t\t\t\t");
+                mostrar.append(arm1.getDano());
+                mostrar.append("\n\tAlcance\t\t\t\t");
+                mostrar.append(arm1.getAlcance());
+                mostrar.append("\n\tRango de explosión\t");
+                mostrar.append(arm1.getRangoExplosion());
+            }
+            datosArmas.setText(String.valueOf(mostrar));
             detalles.setVisible(false);
             armas.setVisible(true);
         }
     }
 
     @FXML
-    public void cargarClones(MouseEvent event){
+    public void cargarClones(MouseEvent event) throws FileNotFoundException {
         cargar();
     }
 
@@ -111,6 +163,9 @@ public class PersonajesCreados implements Initializable, DragWindow {
 
     @FXML
     public void modificar(ActionEvent event) throws IOException {
+        if (!nombresPersonajes.getSelectionModel().getSelectedItem().isEmpty())
+            comun.setNombreElemento(nombresPersonajes.getSelectionModel().getSelectedItem());
+
         if (!comun.isArmas()) {
             comun.setModificado(true);
             comun.abrirVentana("FXMLS/ventanaPersonaje.fxml");
@@ -141,7 +196,7 @@ public class PersonajesCreados implements Initializable, DragWindow {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!comun.getRutaDirectorio().isEmpty()) {
-            System.out.println(comun.getRutaDirectorio());
+            PrototypeFactory.setPrototipos(ProcesadorSerializable.fileReader(comun.getRutaDirectorio()));
             PrototypeFactory.setPrototipos(ProcesadorSerializable.fileReader(comun.getRutaDirectorio()));
         }
         detalles.setVisible(false);

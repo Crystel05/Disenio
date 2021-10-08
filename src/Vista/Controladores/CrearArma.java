@@ -102,11 +102,23 @@ public class CrearArma implements Initializable, DragWindow ,ILoadImages{
         }
     }
 
+    @FXML
+    public void modificar(ActionEvent event){
+        if (!alcanceArma.getText().isEmpty())
+            setAlcance();
+        if (!dannoArma.getText().isEmpty())
+            setDano();
+        if (!rangoExplosionArma.getText().isEmpty())
+            setRango();
+        Arma arma = comun.getControlador().buildCurrentArma();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        comun.getControlador().addBuilderArma();
+
         this.onDraggedScene(arma);
         if (comun.isArmas()){
+            comun.getControlador().createFromArmaExistente(comun.getNombreElemento());
             crearL.setVisible(false);
             modificarL.setVisible(true);
             agregarB.setVisible(false);
@@ -114,6 +126,7 @@ public class CrearArma implements Initializable, DragWindow ,ILoadImages{
             cerrar.setVisible(false);
             cerrar2.setVisible(true);
         }else{
+            comun.getControlador().addBuilderArma();
             crearL.setVisible(true);
             modificarL.setVisible(false);
             agregarB.setVisible(true);

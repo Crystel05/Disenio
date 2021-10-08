@@ -84,14 +84,14 @@
             <Image url="@../Imagenes/salir.png" />
          </image>
       </ImageView>
-      <Text fx:id="modificarL" layoutX="171.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modificar arma" visible="false">
+      <Text fx:id="modificarL" layoutX="173.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modificar arma" visible="false">
          <font>
-            <Font size="30.0" />
+            <Font name="Harrington" size="30.0" />
          </font>
       </Text>
-      <Button fx:id="modificarB" layoutX="188.0" layoutY="355.0" mnemonicParsing="false" text="Modificar arma" visible="false">
+      <Button fx:id="modificarB" blendMode="MULTIPLY" layoutX="237.0" layoutY="363.0" mnemonicParsing="false" onAction="#modificar" text="Modificar arma" visible="false">
          <font>
-            <Font name="Gabriola" size="22.0" />
+            <Font name="Bodoni MT Poster Compressed" size="25.0" />
          </font>
       </Button>
       <TextField fx:id="nivelArmaTF" blendMode="MULTIPLY" layoutX="231.0" layoutY="297.0">

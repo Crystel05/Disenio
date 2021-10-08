@@ -57,7 +57,7 @@
             <Font name="Bodoni MT Poster Compressed" size="26.0" />
          </font></Button>
       <Line endX="300.0" layoutX="367.0" layoutY="159.0" startX="-100.0" stroke="#3187b2" strokeWidth="3.0" />
-      <Pane fx:id="detalles" layoutY="172.0" prefHeight="356.0" prefWidth="933.0">
+      <Pane fx:id="detalles" layoutY="172.0" prefHeight="356.0" prefWidth="933.0" visible="false">
          <children>
             <Text layoutX="583.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes nivel 1">
                <font>
@@ -72,8 +72,8 @@
                <font>
                   <Font name="Gabriola" size="21.0" />
                </font></Text>
-            <ImageView fitHeight="200.0" fitWidth="253.0" layoutX="392.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="200.0" fitWidth="253.0" layoutX="662.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagenPersonaje" fitHeight="200.0" fitWidth="253.0" layoutX="392.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imagenArma" fitHeight="200.0" fitWidth="253.0" layoutX="662.0" layoutY="85.0" pickOnBounds="true" preserveRatio="true" />
             <Button blendMode="MULTIPLY" layoutX="618.0" layoutY="298.0" mnemonicParsing="false" text="Siguiente">
                <font>
                   <Font name="Bodoni MT Poster Compressed" size="26.0" />
@@ -82,7 +82,10 @@
                <font>
                   <Font name="Gabriola" size="20.0" />
                </font></TextArea>
-            <TextField fx:id="cantClonesTF" blendMode="MULTIPLY" layoutX="96.0" layoutY="307.0" onMouseClicked="#cargarClones" promptText="cantidad clones" />
+            <TextField fx:id="cantClonesTF" alignment="TOP_CENTER" blendMode="MULTIPLY" layoutX="86.0" layoutY="303.0" onMouseClicked="#cargarClones" promptText="cantidad clones">
+               <font>
+                  <Font name="Gabriola" size="21.0" />
+               </font></TextField>
          </children>
       </Pane>
       <Pane fx:id="wait" layoutY="176.0" prefHeight="349.0" prefWidth="933.0" visible="false">
@@ -94,40 +97,8 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="armas" layoutY="170.0" prefHeight="356.0" prefWidth="933.0" visible="false">
+      <Pane fx:id="armas" layoutY="170.0" prefHeight="356.0" prefWidth="933.0">
          <children>
-            <Text layoutX="175.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="175.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Daño">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="175.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rango de explosión">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="175.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alcance">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="355.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="355.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="355.0" layoutY="207.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
-            <Text layoutX="355.0" layoutY="284.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-               <font>
-                  <Font name="Gabriola" size="24.0" />
-               </font></Text>
             <Text layoutX="594.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Imágenes nivel x" textAlignment="CENTER">
                <font>
                   <Font name="Gabriola" size="28.0" />
@@ -138,6 +109,16 @@
                <font>
                   <Font name="Bodoni MT Poster Compressed" size="25.0" />
                </font></Button>
+            <TextArea fx:id="datosArmas" blendMode="MULTIPLY" editable="false" layoutX="27.0" layoutY="26.0" prefHeight="259.0" prefWidth="393.0">
+               <font>
+                  <Font name="Gabriola" size="20.0" />
+               </font>
+            </TextArea>
+            <TextField fx:id="cantidadClonesATF" alignment="CENTER" layoutX="117.0" layoutY="299.0" onMouseClicked="#cargarClones" promptText="cantidad de clones">
+               <font>
+                  <Font name="Gabriola" size="22.0" />
+               </font>
+            </TextField>
          </children></Pane>
    </children>
 </Pane>

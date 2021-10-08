@@ -1,6 +1,7 @@
 package FileManager;
 
 import Modelo.EnumPrototypes;
+import Modelo.Personaje;
 import Modelo.PrototypePattern.IPrototype;
 
 import java.io.*;
@@ -39,6 +40,8 @@ public class ProcesadorSerializable {
             in.close();
             fileIn.close();
             System.out.println("Loaded DataBase successfully from: " + path);
+        }catch (FileNotFoundException e){
+            System.out.println("No hay archivo");
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {

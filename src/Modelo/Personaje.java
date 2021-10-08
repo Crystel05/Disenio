@@ -189,15 +189,15 @@ public class Personaje implements IPrototype<Personaje> {
 
         //Duda al profe de que si estoy compartiendo referencias en los tipos nativos.
         public BuilderPersonaje(Personaje personaje) {
-            personaje.nombre = nombre;
-            personaje.apariencia = apariencia.deepClone();
-            personaje.vida = vida;
-            personaje.ataque = ataque;
-            personaje.nivel = nivel;
-            personaje.campos = campos;
-            personaje.nivelAparicion = nivelAparicion;
-            personaje.costo = costo;
-            personaje.armas = armas.deepClone();
+            this.nombre = personaje.nombre;
+            this.apariencia = personaje.apariencia.deepClone();
+            this.vida = personaje.vida;
+            this.ataque = personaje.ataque;
+            this.nivel = personaje.nivel;
+            this.campos = personaje.campos;
+            this.nivelAparicion = personaje.nivelAparicion;
+            this.costo = personaje.costo;
+            this.armas = personaje.armas.deepClone();
         }
 
         public BuilderPersonaje setNombre(String nombre) {

@@ -1,10 +1,12 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import FileManager.ProcesadorSerializable;
 import Modelo.Arma;
 import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
 import Modelo.Personaje;
+import Modelo.PrototypePattern.IPrototype;
 import Vista.ControllerComun;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,9 +22,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ControllerPersonaje implements Initializable, DragWindow,ILoadImages {
@@ -67,9 +71,6 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     private TextField costoTF;
 
     @FXML
-    private ImageView imagenNivelIV;
-
-    @FXML
     private TextField nivelAparTF;
 
     @FXML
@@ -80,8 +81,9 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
 
     @FXML
     public void agregarNiveles(ActionEvent event) throws IOException {
-        if (!nivelPersonajeTF.getText().isEmpty())
+        if (!nivelPersonajeTF.getText().isEmpty()){
             comun.abrirVentana("FXMLS/escogerNiveles.fxml",this);
+        }
     }
 
     @FXML
@@ -109,6 +111,22 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
         }else{
             System.out.println("Tiene que tener nombre");
         }
+    }
+
+    @FXML
+    public void modificar(ActionEvent event){
+        if (!ataqueTF.getText().isEmpty())
+            setAtaque();
+        if (!vidaTF.getText().isEmpty())
+            setVida();
+        if (!camposTF.getText().isEmpty())
+            setCampos();
+        if (!nivelAparTF.getText().isEmpty())
+            setNivel();
+        if (!costoTF.getText().isEmpty())
+            setCosto();
+        Personaje personaje = comun.getControlador().buildCurrentPersonaje();
+        System.out.println(personaje.toString());
     }
 
     @Override
@@ -156,15 +174,21 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
     }
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources)  {
+        if (!comun.getRutaDirectorio().isEmpty()) {
+            HashMap<EnumPrototypes, HashMap<String, IPrototype>> loadedHash = ProcesadorSerializable.fileReader(comun.getRutaDirectorio());
+            if (!loadedHash.isEmpty())
+                PrototypeFactory.setPrototipos(loadedHash);
+        }
         this.onDraggedScene(contenedor);
-        comun.getControlador().addBuilderPersonaje();
         ObservableList<String> armas = FXCollections.observableArrayList();
         ArrayList<String> nombres = PrototypeFactory.getAllKeys(EnumPrototypes.ARMAS);
         System.out.println(nombres.size());
         armas.addAll(nombres);
         armasPersonaje.setItems(armas);
         if (comun.isModificado()){
+            System.out.println(comun.getNombreElemento());
+            comun.getControlador().createFromPersonajeExistente(comun.getNombreElemento());
             nombreTF.setDisable(true);
             salir2.setVisible(true);
             salir.setVisible(false);
@@ -173,6 +197,7 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
             agregarBut.setVisible(false);
             modificarButt.setVisible(true);
         }else{
+            comun.getControlador().addBuilderPersonaje();
             nombreTF.setDisable(false);
             salir2.setVisible(false);
             salir.setVisible(true);

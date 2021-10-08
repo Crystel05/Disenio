@@ -52,15 +52,15 @@ public class CreadorDePersonajes {
     //Estos metodos se pueden usar tanto para modificar como para la creacion de un nuevo personaje a base de otro
     //Aprovechando el builder para modificar lo que ya esxiste pero con una nueva referencia.
     //Cuando se guarda en el hash, el id se encarga de sobreescribir o de guardar un nuevo personaje
-    public void createFromPersonajeExistente(Personaje personaje){
+    public void createFromPersonajeExistente(String personaje){
         //A partir de este ya se puede usar el builder como si fuerea desde cero.
-        currentBuilding = personaje.getBuildable();
+        Personaje protoPersonaje = (Personaje)PrototypeFactory.getItem(personaje,1,EnumPrototypes.PERSONAJES).get(0);
+        currentBuilding = protoPersonaje.getBuildable();
     }
-
-    public void createFromArmaExistente(Arma arma){
-        currentBuilding = arma.getBuildable();
+    public void createFromArmaExistente(String arma){
+        Arma protoArma = (Arma)PrototypeFactory.getItem(arma,1,EnumPrototypes.ARMAS).get(0);
+        currentBuilding = protoArma.getBuildable();
     }
-
 
     ////////////////////////////////////////////////////Metodos de BuilderPersonaje////////////////////////////////////////////////////
 

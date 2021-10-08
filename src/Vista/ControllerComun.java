@@ -31,6 +31,7 @@ public class ControllerComun {
     private boolean armas;
     private static ControllerComun controllerComun ;
     private String rutaDirectorio = null;
+    private String nombreElemento;
     private boolean esArma;
 
     public ControllerComun(){}
@@ -67,6 +68,13 @@ public class ControllerComun {
         this.rutaDirectorio = rutaDirectorio;
     }
 
+    public String getNombreElemento() {
+        return nombreElemento;
+    }
+
+    public void setNombreElemento(String nombreElemento) {
+        this.nombreElemento = nombreElemento;
+    }
 
     public void cerrar(MouseEvent event, Boolean atras){
         Node source = (Node) event.getSource();

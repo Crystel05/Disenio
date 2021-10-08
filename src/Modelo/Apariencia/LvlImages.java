@@ -52,6 +52,11 @@ public class LvlImages implements IPrototype<LvlImages> {
         return string;
     }
 
+    public ArrayList<String> getDefault(){
+        ArrayList<ArrayList<String>> defaultImages = new ArrayList<ArrayList<String>>(aparienciasPorNivel.values());
+        return defaultImages.get(0);
+    }
+
     //TODO:Preguntar si incluimos en interfaz un boton que deje copiar los campos de las imagenes. Con arrayList libres
     //Esto clon puede ser util para copiar el set de acciones pero que tengan imagenes nuevas. Esto puede ser util para cuando se quiere repetir
     //Las acciones pero no se quieren las mismas imagenes. Mas creacional que de copia.
