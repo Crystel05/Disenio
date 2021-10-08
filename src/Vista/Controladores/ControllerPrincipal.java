@@ -51,9 +51,10 @@ public class ControllerPrincipal implements Initializable, DragWindow {
 
     @FXML
     public void crear(ActionEvent event) throws IOException {
-        if (!rutaDirectorio.getText().isEmpty() && !comun.getRutaDirectorio().isEmpty()) {
+        if (!rutaDirectorio.getText().isEmpty() && comun.getRutaDirectorio() == null) {
             comun.setRutaDirectorio(rutaDirectorio.getText());
         }
+
         if (!comun.getRutaDirectorio().isEmpty()){
             if (armaRB.isSelected() || personajeRB.isSelected()) {
                 Node source = (Node) event.getSource();

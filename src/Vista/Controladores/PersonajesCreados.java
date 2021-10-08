@@ -141,6 +141,7 @@ public class PersonajesCreados implements Initializable, DragWindow {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!comun.getRutaDirectorio().isEmpty()) {
+            System.out.println(comun.getRutaDirectorio());
             PrototypeFactory.setPrototipos(ProcesadorSerializable.fileReader(comun.getRutaDirectorio()));
         }
         detalles.setVisible(false);
