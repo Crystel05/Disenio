@@ -47,15 +47,25 @@ public class WeaponManager implements IPrototype<WeaponManager> {
         return armas.get(nombre);
     }
 
-    public Arma getArmaActual(Arma arma){return this.armaActual;}
+    public Arma getArmaActual() {
+        if(armaActual == null){
+            if (!armas.isEmpty())
+            return armas.get(armas.keySet().toArray()[0]);}
+        return this.armaActual;
+    }
 
-    public void setArmaActual(Arma arma){this.armaActual = arma;}
+    public void setArmaActual(Arma arma){
+        this.armaActual = arma;
+    }
 
     //TODO:Probar en interfaz para ver las diferentes armas del personaje
     public void nextArma(){
         if(!armas.isEmpty()) {
             ArrayList<Arma> listaArmas = new ArrayList<>(armas.values());
-            armaActual = listaArmas.get(nextIndex(listaArmas.indexOf(armaActual)));
+            int index = nextIndex(listaArmas.indexOf(armaActual));
+            System.out.println(index);
+            this.armaActual = listaArmas.get(index);
+            System.out.println(armaActual);
         }
     }
 
@@ -66,14 +76,15 @@ public class WeaponManager implements IPrototype<WeaponManager> {
         }
     }
 
+
     private int nextIndex(int indexOf)
     {
-        return indexOf == armas.values().size()-1?indexOf++:0;
+        return indexOf == armas.values().size()-1?0:++indexOf;
     }
 
     private int prevIndex(int indexOf)
     {
-        return indexOf == 0?indexOf--:armas.values().size()-1;
+        return indexOf == 0?armas.values().size()-1:--indexOf;
     }
 
     //La diferencia esta en que este no hace un deepClone a las armas.
@@ -81,7 +92,7 @@ public class WeaponManager implements IPrototype<WeaponManager> {
     public WeaponManager clone() {
         HashMap<String ,Arma> copiaArmas = new HashMap<>();
         for(Map.Entry<String,Arma> entry:armas.entrySet()){
-            armas.put(entry.getKey(),entry.getValue().clone());
+            copiaArmas.put(entry.getKey(),entry.getValue().clone());
         }
         return new WeaponManager(copiaArmas);
     }
@@ -90,10 +101,12 @@ public class WeaponManager implements IPrototype<WeaponManager> {
     public WeaponManager deepClone() {
         HashMap<String ,Arma> copiaArmas = new HashMap<>();
         for(Map.Entry<String,Arma> entry:armas.entrySet()){
-            armas.put(entry.getKey(),entry.getValue().deepClone());
-        }
+            Arma arma = entry.getValue().deepClone();
+            copiaArmas.put(entry.getKey(), arma);
 
-        return new WeaponManager(copiaArmas);
+        }
+        WeaponManager wp = new WeaponManager(copiaArmas);
+        return wp;
     }
     
     public String toString(){

@@ -290,7 +290,8 @@ public class Personaje implements IPrototype<Personaje> {
                 ", Nivel:" + nivel + '\n' +
                 ", Campos:" + campos + '\n' +
                 ", NivelAparicion:" + nivelAparicion + '\n' +
-                ", Costo:" + costo;
+                ", Costo:" + costo
+                +", Armas: " + armas;
     }
 
     public BuilderPersonaje getBuildable(){

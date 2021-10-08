@@ -31,7 +31,6 @@ import java.util.ResourceBundle;
 
 public class ControllerPersonaje implements Initializable, DragWindow,ILoadImages {
 
-    //TODO:Cuando se cargue la pantalla hay que llamar al metodo que creaa el builder.
     private final ControllerComun comun = ControllerComun.getInstance();
 
     @FXML
@@ -125,7 +124,8 @@ public class ControllerPersonaje implements Initializable, DragWindow,ILoadImage
             setNivel();
         if (!costoTF.getText().isEmpty())
             setCosto();
-        comun.getControlador().buildCurrentPersonaje();
+        Personaje personaje = comun.getControlador().buildCurrentPersonaje();
+        System.out.println( personaje.toString());
     }
 
     @Override

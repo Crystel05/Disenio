@@ -42,9 +42,9 @@ public class PrototypeFactory {
     public static ArrayList<IPrototype>getAll(EnumPrototypes tipoHash){
         ArrayList<IPrototype> listaItems = new ArrayList<>();
 
-        Set<EnumPrototypes> llaves = prototipos.keySet();
+        Set<String> llaves = prototipos.get(tipoHash).keySet();
 
-        for(EnumPrototypes llave : llaves) {
+        for(String llave : llaves) {
             listaItems.add(((IPrototype)prototipos.get(tipoHash).get(llave).deepClone()));
         }
         return listaItems;

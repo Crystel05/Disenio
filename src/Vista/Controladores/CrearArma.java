@@ -1,9 +1,11 @@
 package Vista.Controladores;
 
 import Controlador.DragWindow;
+import FileManager.ProcesadorSerializable;
 import Modelo.Arma;
 import Modelo.EnumPrototypes;
 import Modelo.FactoryPattern.PrototypeFactory;
+import Modelo.PrototypePattern.IPrototype;
 import Vista.ControllerComun;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class CrearArma implements Initializable, DragWindow ,ILoadImages{
@@ -116,6 +119,12 @@ public class CrearArma implements Initializable, DragWindow ,ILoadImages{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.onDraggedScene(arma);
+        if (!comun.getRutaDirectorio().isEmpty()) {
+            HashMap<EnumPrototypes, HashMap<String, IPrototype>> loadedHash = ProcesadorSerializable.fileReader(comun.getRutaDirectorio());
+            if (!loadedHash.isEmpty())
+                PrototypeFactory.setPrototipos(loadedHash);
+        }
+
         if (comun.isArmas()){
             nombreArma.setDisable(true);
             comun.getControlador().createFromArmaExistente(comun.getNombreElemento());

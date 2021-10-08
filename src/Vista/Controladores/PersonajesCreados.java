@@ -31,12 +31,18 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class PersonajesCreados implements Initializable, DragWindow {
 
     private final ControllerComun comun = ControllerComun.getInstance();
-    private int nivel = 1;
+    private int nivel = 0;
     private Personaje personajeP;
+    private Arma armaP;
+    private Set<Integer> listaNivelesPersonajes;
+    private Set<Integer> listaNivelesArma;
+    private ArrayList<IPrototype> personajes;
+    private ArrayList<IPrototype> armasA;
 
     @FXML
     private Text armasL;
@@ -78,6 +84,9 @@ public class PersonajesCreados implements Initializable, DragWindow {
     private ImageView imagenArma;
 
     @FXML
+    private ImageView imagenArma2;
+
+    @FXML
     private Text nivelLabel;
 
     @FXML
@@ -86,6 +95,7 @@ public class PersonajesCreados implements Initializable, DragWindow {
     @FXML
     public void verDetalles(ActionEvent event) throws FileNotFoundException {
         wait.setVisible(false);
+        cargarPrimeravez();
         cargar();
     }
 
@@ -93,9 +103,9 @@ public class PersonajesCreados implements Initializable, DragWindow {
     public void siguiente(ActionEvent event) throws FileNotFoundException {
         try {
             nivel ++;
-            String nivels = "Imágenes nivel " + nivel;
+            String nivels = "Imágenes nivel " + listaNivelesPersonajes.toArray()[nivel];
             imganesPersonaje.setText(nivels);
-            cargarImagenes();
+            cargarImagenesPersonaje();
         }catch (NullPointerException e){
             System.out.println("No hay más imágemes");
         }
@@ -105,7 +115,7 @@ public class PersonajesCreados implements Initializable, DragWindow {
     public void siguienteArmas(ActionEvent event){
         try {
             nivel ++;
-            String nivels = "Imágenes nivel " + nivel;
+            String nivels = "Imágenes nivel " + listaNivelesArma.toArray()[nivel];
             nivelLabel.setText(nivels);
         }catch (NullPointerException e){
             System.out.println("No hay más imágenes para mostrar");
@@ -113,17 +123,33 @@ public class PersonajesCreados implements Initializable, DragWindow {
 
     }
 
-    public void cargar() throws FileNotFoundException {
+    public void cargarPrimeravez(){
         if (!comun.isArmas()) {
-            ArrayList<IPrototype> personajes;
             if (cantClonesTF.getText().isEmpty())
-                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), nivel, EnumPrototypes.PERSONAJES);
-            else{
+                personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.PERSONAJES);
+            else {
                 int cantClones = Integer.parseInt(cantClonesTF.getText());
                 personajes = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.PERSONAJES);
             }
+
+            personajeP = (Personaje) personajes.get(0);
+            listaNivelesPersonajes = personajeP.getApariencia().getImagenes().keySet();
+            listaNivelesArma = personajeP.getArmas().getArmaActual().getApariencia().getImagenes().keySet();
+        }else{
+            if (cantidadClonesATF.getText().isEmpty())
+                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.ARMAS);
+            else{
+                int cantClones = Integer.parseInt(cantidadClonesATF.getText());
+                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.ARMAS);
+            }
+            armaP = (Arma) armasA.get(0);
+            listaNivelesArma = armaP.getApariencia().getImagenes().keySet();
+        }
+    }
+
+    public void cargar() throws FileNotFoundException {
+        if (!comun.isArmas()){
             StringBuilder mostrar = new StringBuilder("PERSONAJE\n");
-            personajeP =(Personaje) personajes.get(0);
             int i = 0;
             for (IPrototype per : personajes){
                 if (personajes.get(0) != per)
@@ -143,20 +169,12 @@ public class PersonajesCreados implements Initializable, DragWindow {
                 mostrar.append("\n\tCosto\t\t\t");
                 mostrar.append(personaje.getataque());
             }
-            cargarImagenes();
+            cargarImagenesPersonaje();
             clones.setText(String.valueOf(mostrar));
             detalles.setVisible(true);
             armas.setVisible(false);
         }else{
-            ArrayList<IPrototype> armasA;
-            if (cantidadClonesATF.getText().isEmpty())
-                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), 1, EnumPrototypes.ARMAS);
-            else{
-                int cantClones = Integer.parseInt(cantidadClonesATF.getText());
-                armasA = PrototypeFactory.getItem(nombresPersonajes.getSelectionModel().getSelectedItem(), cantClones, EnumPrototypes.ARMAS);
-            }
             StringBuilder mostrar = new StringBuilder("ARMA\n");
-            Arma armaP = (Arma) armasA.get(0);
             int i = 0;
             for (IPrototype arm : armasA){
                 if (armasA.get(0) != arm)
@@ -172,18 +190,40 @@ public class PersonajesCreados implements Initializable, DragWindow {
                 mostrar.append("\n\tRango de explosión\t");
                 mostrar.append(arm1.getRangoExplosion());
             }
+            cargarImagenesArma();
             datosArmas.setText(String.valueOf(mostrar));
             detalles.setVisible(false);
             armas.setVisible(true);
         }
     }
 
-    public void cargarImagenes() throws FileNotFoundException {
-        String path = personajeP.getApariencia().getImagenes().get(nivel).getDefault().get(0);
-        //TODO: get arma de un personaje en x nivel
+    public void cargarImagenesPersonaje() throws FileNotFoundException {
+        String path = personajeP.getApariencia().getImagenes().get(listaNivelesPersonajes.toArray()[nivel]).getDefault().get(0);
+        InputStream personaje = new FileInputStream(path);
+        Image personajeImagen = new Image(personaje);
+        imagenPersonaje.setImage(personajeImagen);
+        try{
+            String pathArma = personajeP.getArmas().getArmaActual().getApariencia().getImagenes().get(listaNivelesArma.toArray()[nivel]).getDefault().get(0);
+            InputStream arma = new FileInputStream(pathArma);
+            Image armaImagen = new Image(arma);
+            imagenArma.setImage(armaImagen);
+        }catch (NullPointerException e){
+            System.out.println("No hay arma");
+        }
+
+    }
+
+    public void cargarImagenesArma() throws FileNotFoundException {
+        String path = armaP.getApariencia().getImagenes().get(listaNivelesArma.toArray()[nivel]).getDefault().get(0);
         InputStream stream = new FileInputStream(path);
         Image image = new Image(stream);
-        imagenPersonaje.setImage(image);
+        imagenArma2.setImage(image);
+    }
+
+    @FXML
+    public void siguienteArma(ActionEvent event) throws FileNotFoundException {
+        personajeP.getArmas().nextArma();
+        cargarImagenesPersonaje();
     }
 
     @FXML
@@ -217,17 +257,6 @@ public class PersonajesCreados implements Initializable, DragWindow {
             wait.setVisible(false);
             armas.setVisible(true);
         }
-//        try {
-//            //llenar datos de detalles
-//            String nombre = nombresPersonajes.getSelectionModel().getSelectedItem();
-//            comun.abrirVentana("FXMLS/ventanaPersonaje.fxml");
-//            detalles.setVisible(true);
-//            wait.setVisible(false);
-//        }catch (NullPointerException e){
-//            System.out.println("Sin selección");
-//            detalles.setVisible(true);
-//            wait.setVisible(false);
-//        }
     }
 
     @Override
