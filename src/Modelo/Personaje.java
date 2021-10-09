@@ -142,7 +142,7 @@ public class Personaje implements IPrototype<Personaje> {
 
     ///Metodos Dummy
 
-    protected void atacar(ArrayList<Personaje> objetivos,ArrayList<Arma> armas){
+    public void atacar(ArrayList<Personaje> objetivos,ArrayList<Arma> armas){
         if(armas != null){
             for (Arma arma:armas){
                 for (Personaje objetivo:objetivos ){
@@ -157,16 +157,20 @@ public class Personaje implements IPrototype<Personaje> {
         }
     }
 
-    protected void moverse(int x,int y){
+    public void moverse(int x,int y){
         setPosition(x,y);
     }
 
-    protected void morir(){
+    public void morir(){
         setAlive(false);
         this.vida = 0;
     }
 
-    protected void danar(int dano){
+    public void levelUp(){
+        this.nivel ++;
+    }
+
+    public void danar(int dano){
         this.vida -= dano;
         if (vida<=0){
             morir();
@@ -237,8 +241,6 @@ public class Personaje implements IPrototype<Personaje> {
             return this;
         }
 
-        //TODO:Tomar en consideracion cuando no hay imagenes y cuando ya existe la lista.
-        //Este es para agregar sobre los LvlImages
         public BuilderPersonaje addApariencia(int nivel,String nombre, ArrayList<String> imagenes) {
             this.apariencia.addApariencia(nivel,nombre,imagenes);
             return this;
@@ -298,7 +300,4 @@ public class Personaje implements IPrototype<Personaje> {
         return new BuilderPersonaje(this);
     }
 
-    //TODO: Metodos Dummy Tienen que poder hacersele override.
-    //TODO: Hacer ToString() mas bonito para interfaz.
-    //TODO: Que no se me olvide preguntar que hacer cuando uno agrega a una lista vacia o listas con objeto Mas que todo en el caso de ManagerApariencia y armas.
 }
