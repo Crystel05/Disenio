@@ -1,3 +1,11 @@
+/**
+ * Trabajo realizado por: 
+ * Fabrizio Ferreto Saborío 2019177147
+ * Ulises Rodríguez Perez 2019380067
+ * Fernando Álvarez 2019171657
+ * Crytel Montero Obando 2019158736
+ * */
+
 package Vista;
 
 import Modelo.FactoryPattern.PrototypeFactory;
